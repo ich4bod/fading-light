@@ -131,7 +131,8 @@ input[type="range"] {
   opacity: 1;
 }
 
-.second-flash {
+.second-flash,
+.small-pulses {
   margin-top: 20px;
 }
 
@@ -140,6 +141,10 @@ input[type="range"] {
 }
 
 #second-glow {
+  background: #e9755c;
+}
+
+#train-glow {
   background: #e9755c;
 }
 

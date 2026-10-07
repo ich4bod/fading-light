@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=2">
-  <script src="/app.js?v=2" defer></script>
+  <link rel="stylesheet" href="/style.css?v=3">
+  <script src="/app.js?v=3" defer></script>
 </head>
 <body>
   <main>
@@ -56,11 +56,29 @@
       <p>Both flashes began at one. Only the fraction kept differs.</p>
     </section>
 
+    <section class="small-pulses" aria-labelledby="pulse-title">
+      <h2 id="pulse-title">Small pulses</h2>
+      <div class="control">
+        <label for="pulse-spacing">Updates between pulses</label>
+        <select id="pulse-spacing">
+          <option value="12">12 updates</option>
+          <option value="24" selected>24 updates</option>
+          <option value="48">48 updates</option>
+        </select>
+      </div>
+      <p id="train-level" class="readout" aria-live="polite">Frame 0 · pulse-train level 35.00%.</p>
+      <div class="lamp" role="img" aria-label="Mathematical pulse-train level">
+        <div id="train-glow" class="glow"></div>
+      </div>
+      <p>Start at 35%. On a pulse update, first keep the fraction, then add 35%, stopping at 100%. Seeking recomputes the whole sequence.</p>
+    </section>
+
     <section class="chart-section">
       <h2>One flash</h2>
-      <svg class="chart" viewBox="0 0 320 160" role="img" aria-label="Two remaining levels across 120 updates" preserveAspectRatio="none">
+      <svg class="chart" viewBox="0 0 320 160" role="img" aria-label="Flashes and pulse-train level across 120 updates" preserveAspectRatio="none">
         <polyline id="flash-curve" stroke="#ffd166" stroke-width="2" fill="none"></polyline>
         <polyline id="second-curve" stroke="#e9755c" stroke-width="2" fill="none"></polyline>
+        <polyline id="train-curve" stroke="#b8bcc6" stroke-width="2" stroke-dasharray="4 3" fill="none"></polyline>
       </svg>
     </section>
 
