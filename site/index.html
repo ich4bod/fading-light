@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=3">
-  <script src="/app.js?v=5" defer></script>
+  <script src="/app.js?v=6" defer></script>
 </head>
 <body>
   <main>
@@ -27,11 +27,21 @@
         <input id="frame" type="range" min="0" max="120" step="1" value="0">
       </div>
       <div class="control">
+        <label for="threshold">Level to find</label>
+        <select id="threshold">
+          <option value="0.5" selected>Half (50%)</option>
+          <option value="0.1">One tenth (10%)</option>
+        </select>
+      </div>
+      <div class="control">
         <label for="update-rate">Logical updates per second</label>
         <select id="update-rate">
           <option value="30" selected>30 updates per second</option>
           <option value="60">60 updates per second</option>
         </select>
+      </div>
+      <div class="actions">
+        <button id="seek-threshold" type="button">Go to this level</button>
       </div>
       <div class="actions">
         <button id="rewind" type="button">Previous update</button>
@@ -43,6 +53,8 @@
       </div>
     </section>
 
+    <p id="threshold-info" class="muted">First whole update at or below 50%: 35.</p>
+    <p id="threshold-help" class="muted">A crossing between updates is rounded up. A level beyond this strip cannot be reached here.</p>
     <p id="play-status" class="muted" aria-live="polite">Paused.</p>
     <p>Playback uses elapsed time, not the number of screen redraws. Pause or move the update slider to inspect a pulse.</p>
 

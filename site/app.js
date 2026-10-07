@@ -7,6 +7,9 @@
   const run = document.querySelector("#run");
   const pause = document.querySelector("#pause");
   const updateRate = document.querySelector("#update-rate");
+  const threshold = document.querySelector("#threshold");
+  const seekThreshold = document.querySelector("#seek-threshold");
+  const thresholdInfo = document.querySelector("#threshold-info");
   const playStatus = document.querySelector("#play-status");
   const flashLevel = document.querySelector("#flash-level");
   const halfLevel = document.querySelector("#half-level");
@@ -32,6 +35,8 @@
     const n = Number(frame.value);
     const r = Number(retention.value);
     const level = r ** n;
+    const target = Number(threshold.value);
+    const firstUpdate = Math.ceil(Math.log(target) / Math.log(r));
     const rB = Number(retentionB.value);
     const levelB = rB ** n;
     const spacing = Number(pulseSpacing.value);
@@ -45,6 +50,10 @@
     trainLevel.textContent = `Frame ${n} · pulse-train level ${(100 * train).toFixed(2)}%.`;
     secondLevel.textContent = `Frame ${n} · retained ${(100 * levelB).toFixed(2)}%.`;
     halfLevel.textContent = `Half the starting level after ${(Math.log(0.5) / Math.log(r)).toFixed(2)} updates.`;
+    thresholdInfo.textContent = firstUpdate > 120
+      ? "This level is beyond the 120-update strip."
+      : `First whole update at or below ${(100 * target).toFixed(0)}%: ${firstUpdate}.`;
+    seekThreshold.disabled = firstUpdate > 120 || running;
     timeUnit.textContent = `At ${currentRate} updates per second, frame ${n} corresponds to ${(n / currentRate).toFixed(2)} seconds.`;
     halfTime.textContent = `At this rate, half the starting level takes ${(Math.log(0.5) / Math.log(r) / currentRate).toFixed(2)} seconds.`;
     run.textContent = `Run at ${currentRate} updates per second`;
@@ -105,6 +114,14 @@
     }
   }
 
+  threshold.addEventListener("change", render);
+  seekThreshold.addEventListener("click", () => {
+    const target = Number(threshold.value);
+    const firstUpdate = Math.ceil(Math.log(target) / Math.log(Number(retention.value)));
+    if (running || firstUpdate > 120) return;
+    frame.value = String(firstUpdate);
+    render();
+  });
   updateRate.addEventListener("change", () => {
     pauseForControlChange();
     currentRate = Number(updateRate.value);
