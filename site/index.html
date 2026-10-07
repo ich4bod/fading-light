@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=1">
-  <script src="/app.js?v=1" defer></script>
+  <link rel="stylesheet" href="/style.css?v=2">
+  <script src="/app.js?v=2" defer></script>
 </head>
 <body>
   <main>
@@ -39,10 +39,28 @@
       <div id="flash-glow" class="glow"></div>
     </div>
 
+    <section class="second-flash" aria-labelledby="second-title">
+      <h2 id="second-title">A second flash</h2>
+      <div class="control">
+        <label for="retention-b">Second fraction kept per update</label>
+        <select id="retention-b">
+          <option value="0.9" selected>90%</option>
+          <option value="0.98">98%</option>
+          <option value="0.995">99.5%</option>
+        </select>
+      </div>
+      <p id="second-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
+      <div class="lamp" role="img" aria-label="Second mathematical flash level">
+        <div id="second-glow" class="glow"></div>
+      </div>
+      <p>Both flashes began at one. Only the fraction kept differs.</p>
+    </section>
+
     <section class="chart-section">
       <h2>One flash</h2>
-      <svg class="chart" viewBox="0 0 320 160" role="img" aria-label="Remaining level across 120 updates" preserveAspectRatio="none">
+      <svg class="chart" viewBox="0 0 320 160" role="img" aria-label="Two remaining levels across 120 updates" preserveAspectRatio="none">
         <polyline id="flash-curve" stroke="#ffd166" stroke-width="2" fill="none"></polyline>
+        <polyline id="second-curve" stroke="#e9755c" stroke-width="2" fill="none"></polyline>
       </svg>
     </section>
 

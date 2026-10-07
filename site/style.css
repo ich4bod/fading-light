@@ -131,6 +131,18 @@ input[type="range"] {
   opacity: 1;
 }
 
+.second-flash {
+  margin-top: 20px;
+}
+
+.second-flash .control {
+  max-width: 360px;
+}
+
+#second-glow {
+  background: #e9755c;
+}
+
 .chart-section {
   margin-top: 8px;
 }
