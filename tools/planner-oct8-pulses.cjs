@@ -13,4 +13,4 @@ if(mode==='saturation'){await click(p,'seek-first-cap');A.equal(await p.locator(
 }
 A.equal(await text(p,'play-status'),'Paused.');
 
-A.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await p.screenshot({path:`/tmp/oct8-${mode}-${width}.png`,fullPage:true});await p.close()}console.log(messages[mode])}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});
+A.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await p.screenshot({path:`/tmp/oct8-${mode}-${width}.png`,fullPage:true});await p.close()}console.log({slots:'pulse-slot navigation seeks without changing the experiment',burst:'finite pulse bursts stop adding while their remaining level fades',clipping:'pulse arithmetic exposes decay addition and the clipped remainder',saturation:'the first capped pulse is sought only when the finite curve reaches one'}[mode])}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});
