@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=3">
-  <script src="/app.js?v=3" defer></script>
+  <script src="/app.js?v=4" defer></script>
 </head>
 <body>
   <main>
@@ -30,7 +30,14 @@
         <button id="rewind" type="button">Previous update</button>
         <button id="advance" type="button">Next update</button>
       </div>
+      <div class="actions playback-actions">
+        <button id="run" type="button">Run at 30 updates per second</button>
+        <button id="pause" type="button" disabled>Pause</button>
+      </div>
     </section>
+
+    <p id="play-status" class="muted" aria-live="polite">Paused.</p>
+    <p>Playback uses elapsed time, not the number of screen redraws. Pause or move the update slider to inspect a pulse.</p>
 
     <p id="flash-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
     <p id="half-level" class="muted">Half the starting level after 34.31 updates.</p>
