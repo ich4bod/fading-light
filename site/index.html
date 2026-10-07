@@ -26,6 +26,13 @@
         <label for="frame">Update number</label>
         <input id="frame" type="range" min="0" max="120" step="1" value="0">
       </div>
+      <div class="control">
+        <label for="update-rate">Logical updates per second</label>
+        <select id="update-rate">
+          <option value="30" selected>30 updates per second</option>
+          <option value="60">60 updates per second</option>
+        </select>
+      </div>
       <div class="actions">
         <button id="rewind" type="button">Previous update</button>
         <button id="advance" type="button">Next update</button>
@@ -40,7 +47,10 @@
     <p>Playback uses elapsed time, not the number of screen redraws. Pause or move the update slider to inspect a pulse.</p>
 
     <p id="flash-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
+    <p id="time-unit" class="muted">At 30 updates per second, frame 0 corresponds to 0.00 seconds.</p>
     <p id="half-level" class="muted">Half the starting level after 34.31 updates.</p>
+    <p id="half-time" class="muted">At this rate, half the starting level takes 1.14 seconds.</p>
+    <p id="rate-help" class="muted">Changing the rate pauses playback. The same update number keeps the same level; only its time in seconds changes.</p>
 
     <div class="lamp" role="img" aria-label="Mathematical flash level">
       <div id="flash-glow" class="glow"></div>

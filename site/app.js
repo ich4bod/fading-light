@@ -6,9 +6,12 @@
   const advance = document.querySelector("#advance");
   const run = document.querySelector("#run");
   const pause = document.querySelector("#pause");
+  const updateRate = document.querySelector("#update-rate");
   const playStatus = document.querySelector("#play-status");
   const flashLevel = document.querySelector("#flash-level");
   const halfLevel = document.querySelector("#half-level");
+  const timeUnit = document.querySelector("#time-unit");
+  const halfTime = document.querySelector("#half-time");
   const glow = document.querySelector("#flash-glow");
   const glowB = document.querySelector("#second-glow");
   const secondLevel = document.querySelector("#second-level");
@@ -20,6 +23,7 @@
   const trainCurve = document.querySelector("#train-curve");
 
   let running = false;
+  let currentRate = Number(updateRate.value);
   let startN = 0;
   let startTime = 0;
   let rafHandle = null;
@@ -41,6 +45,9 @@
     trainLevel.textContent = `Frame ${n} · pulse-train level ${(100 * train).toFixed(2)}%.`;
     secondLevel.textContent = `Frame ${n} · retained ${(100 * levelB).toFixed(2)}%.`;
     halfLevel.textContent = `Half the starting level after ${(Math.log(0.5) / Math.log(r)).toFixed(2)} updates.`;
+    timeUnit.textContent = `At ${currentRate} updates per second, frame ${n} corresponds to ${(n / currentRate).toFixed(2)} seconds.`;
+    halfTime.textContent = `At this rate, half the starting level takes ${(Math.log(0.5) / Math.log(r) / currentRate).toFixed(2)} seconds.`;
+    run.textContent = `Run at ${currentRate} updates per second`;
     glow.style.opacity = String(level);
     glowB.style.opacity = String(levelB);
     trainGlow.style.opacity = String(train);
@@ -70,7 +77,7 @@
   }
 
   function updateFromElapsed(now) {
-    const n = Math.min(120, startN + Math.floor((now - startTime) * 30 / 1000));
+    const n = Math.min(120, startN + Math.floor((now - startTime) * currentRate / 1000));
     if (n !== Number(frame.value)) {
       frame.value = String(n);
       render();
@@ -98,6 +105,11 @@
     }
   }
 
+  updateRate.addEventListener("change", () => {
+    pauseForControlChange();
+    currentRate = Number(updateRate.value);
+    render();
+  });
   frame.addEventListener("input", () => {
     if (running) stopPlayback("Paused.");
     else playStatus.textContent = "Paused.";
@@ -130,7 +142,7 @@
     startN = Number(frame.value);
     startTime = performance.now();
     running = true;
-    playStatus.textContent = "Running at 30 updates per second.";
+    playStatus.textContent = `Running at ${currentRate} updates per second.`;
     render();
     rafHandle = requestAnimationFrame(playbackFrame);
   });
