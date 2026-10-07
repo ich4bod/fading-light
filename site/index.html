@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=3">
-  <script src="/app.js?v=7" defer></script>
+  <script src="/app.js?v=8" defer></script>
 </head>
 <body>
   <main>
@@ -88,6 +88,14 @@
     <section class="small-pulses" aria-labelledby="pulse-title">
       <h2 id="pulse-title">Small pulses</h2>
       <div class="control">
+        <label for="pulse-amount">Level added by each pulse</label>
+        <select id="pulse-amount">
+          <option value="0.1">10%</option>
+          <option value="0.35" selected>35%</option>
+          <option value="0.7">70%</option>
+        </select>
+      </div>
+      <div class="control">
         <label for="pulse-spacing">Updates between pulses</label>
         <select id="pulse-spacing">
           <option value="12">12 updates</option>
@@ -99,7 +107,7 @@
       <div class="lamp" role="img" aria-label="Mathematical pulse-train level">
         <div id="train-glow" class="glow"></div>
       </div>
-      <p>Start at 35%. On a pulse update, first keep the fraction, then add 35%, stopping at 100%. Seeking recomputes the whole sequence.</p>
+      <p id="pulse-amount-rule">Each pulse adds the chosen level after decay. The train stops at one; extra level is clipped.</p>
     </section>
 
     <section class="chart-section">

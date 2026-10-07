@@ -19,6 +19,7 @@
   const glowB = document.querySelector("#second-glow");
   const secondLevel = document.querySelector("#second-level");
   const pulseSpacing = document.querySelector("#pulse-spacing");
+  const pulseAmount = document.querySelector("#pulse-amount");
   const trainLevel = document.querySelector("#train-level");
   const trainGlow = document.querySelector("#train-glow");
   const curve = document.querySelector("#flash-curve");
@@ -43,9 +44,10 @@
     const rB = Number(retentionB.value);
     const levelB = rB ** n;
     const spacing = Number(pulseSpacing.value);
-    const trainValues = [0.35];
+    const amount = Number(pulseAmount.value);
+    const trainValues = [amount];
     for (let i = 1; i <= 120; i++) {
-      trainValues.push(Math.min(1, r * trainValues[i - 1] + (i % spacing === 0 ? 0.35 : 0)));
+      trainValues.push(Math.min(1, r * trainValues[i - 1] + (i % spacing === 0 ? amount : 0)));
     }
     const train = trainValues[n];
 
@@ -153,6 +155,10 @@
     render();
   });
   pulseSpacing.addEventListener("change", () => {
+    pauseForControlChange();
+    render();
+  });
+  pulseAmount.addEventListener("change", () => {
     pauseForControlChange();
     render();
   });
