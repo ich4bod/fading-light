@@ -24,6 +24,9 @@
   const curve = document.querySelector("#flash-curve");
   const curveB = document.querySelector("#second-curve");
   const trainCurve = document.querySelector("#train-curve");
+  const updateCursor = document.querySelector("#update-cursor");
+  const flashCursor = document.querySelector("#flash-cursor");
+  const secondCursor = document.querySelector("#second-cursor");
 
   let running = false;
   let currentRate = Number(updateRate.value);
@@ -73,6 +76,15 @@
     trainCurve.setAttribute("points", trainValues.map((value, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * value).toFixed(3)}`
     ).join(" "));
+    const cursorX = 16 + 2.4 * n;
+    updateCursor.setAttribute("x1", String(cursorX));
+    updateCursor.setAttribute("x2", String(cursorX));
+    updateCursor.setAttribute("y1", "16");
+    updateCursor.setAttribute("y2", "144");
+    flashCursor.setAttribute("cx", String(cursorX));
+    flashCursor.setAttribute("cy", String(144 - 128 * level));
+    secondCursor.setAttribute("cx", String(cursorX));
+    secondCursor.setAttribute("cy", String(144 - 128 * levelB));
   }
 
   function stopPlayback(status) {

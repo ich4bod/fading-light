@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=3">
-  <script src="/app.js?v=6" defer></script>
+  <script src="/app.js?v=7" defer></script>
 </head>
 <body>
   <main>
@@ -108,7 +108,11 @@
         <polyline id="flash-curve" stroke="#ffd166" stroke-width="2" fill="none"></polyline>
         <polyline id="second-curve" stroke="#e9755c" stroke-width="2" fill="none"></polyline>
         <polyline id="train-curve" stroke="#b8bcc6" stroke-width="2" stroke-dasharray="4 3" fill="none"></polyline>
+        <line id="update-cursor" stroke="#b8bcc6" stroke-width="1" stroke-dasharray="3 3" pointer-events="none" aria-hidden="true"></line>
+        <circle id="flash-cursor" r="4" fill="#ffd166" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
+        <circle id="second-cursor" r="4" fill="#e9755c" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
       </svg>
+      <p id="curve-cursor-help">The dotted line is this update. The two dots are the levels in the lamps above.</p>
     </section>
 
     <p class="note">Updates are not seconds. This is a mathematical light, not a model of a display or a sound.</p>
