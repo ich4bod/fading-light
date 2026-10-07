@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Fading Light</title>
+  <link rel="stylesheet" href="/style.css?v=1">
+  <script src="/app.js?v=1" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Fading Light</h1>
+    <p class="deck">A flash keeps a fraction of itself at each update. Step it and watch what remains.</p>
+
+    <section class="controls" aria-label="Flash controls">
+      <div class="control">
+        <label for="retention">Fraction kept per update</label>
+        <select id="retention">
+          <option value="0.9">90%</option>
+          <option value="0.98" selected>98%</option>
+          <option value="0.995">99.5%</option>
+        </select>
+      </div>
+      <div class="control range-control">
+        <label for="frame">Update number</label>
+        <input id="frame" type="range" min="0" max="120" step="1" value="0">
+      </div>
+      <div class="actions">
+        <button id="rewind" type="button">Previous update</button>
+        <button id="advance" type="button">Next update</button>
+      </div>
+    </section>
+
+    <p id="flash-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
+    <p id="half-level" class="muted">Half the starting level after 34.31 updates.</p>
+
+    <div class="lamp" role="img" aria-label="Mathematical flash level">
+      <div id="flash-glow" class="glow"></div>
+    </div>
+
+    <section class="chart-section">
+      <h2>One flash</h2>
+      <svg class="chart" viewBox="0 0 320 160" role="img" aria-label="Remaining level across 120 updates" preserveAspectRatio="none">
+        <polyline id="flash-curve" stroke="#ffd166" stroke-width="2" fill="none"></polyline>
+      </svg>
+    </section>
+
+    <p class="note">Updates are not seconds. This is a mathematical light, not a model of a display or a sound.</p>
+  </main>
+</body>
+</html>

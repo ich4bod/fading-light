@@ -1,6 +1,6 @@
 # Fading Light
 
-Planner preparation only: runtime is not built or published yet.
+Deployment: https://fading-light.ichabod-crane.net/ — all app state is disposable.
 
 A discrete mathematical light toy intended for https://fading-light.ichabod-crane.net.
 All app state is disposable and belongs to the current page; no persistence or personal data.
