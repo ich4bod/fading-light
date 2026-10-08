@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=4">
-  <script src="/app.js?v=11" defer></script>
+  <script src="/app.js?v=12" defer></script>
 </head>
 <body>
   <main>
@@ -69,6 +69,7 @@
         <button id="forget-light" type="button">Forget kept experiment</button>
       </div>
       <p id="kept-light-info" class="muted">No light experiment kept.</p>
+      <p id="kept-pulse-count-info" class="muted">No pulse count kept.</p>
       <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
     </section>
 
@@ -113,6 +114,17 @@
           <option value="0.35" selected>35%</option>
           <option value="0.7">70%</option>
         </select>
+      </div>
+      <div class="control">
+        <label for="pulse-count">Additional pulses after the initial level</label>
+        <select id="pulse-count">
+          <option value="0">None</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="4">Four</option>
+          <option value="all" selected>Keep adding</option>
+        </select>
+        <p id="pulse-count-help" class="muted">The initial level is always present. After the chosen additional pulses, only decay remains.</p>
       </div>
       <div class="control">
         <label for="pulse-spacing">Updates between pulses</label>

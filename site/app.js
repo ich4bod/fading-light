@@ -27,6 +27,7 @@
   const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
   const pulseAmount = document.querySelector("#pulse-amount");
+  const pulseCount = document.querySelector("#pulse-count");
   const trainLevel = document.querySelector("#train-level");
   const trainGlow = document.querySelector("#train-glow");
   const curve = document.querySelector("#flash-curve");
@@ -39,6 +40,7 @@
   const returnLight = document.querySelector("#return-light");
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");
+  const keptPulseCountInfo = document.querySelector("#kept-pulse-count-info");
 
   let keptLight = null;
   let running = false;
@@ -55,6 +57,7 @@
       rB: Number(retentionB.value),
       k: Number(pulseSpacing.value),
       a: Number(pulseAmount.value),
+      additionalpulses: pulseCount.value,
       rate: currentRate,
       decayUnit: currentDecayUnit
     };
@@ -63,7 +66,7 @@
   function sameExperiment(a, b) {
     return a.n === b.n && a.rA === b.rA && a.rB === b.rB &&
       a.k === b.k && a.a === b.a && a.rate === b.rate &&
-      a.decayUnit === b.decayUnit;
+      a.decayUnit === b.decayUnit && a.additionalpulses === b.additionalpulses;
   }
 
   function effectiveRetention(raw) {
@@ -89,9 +92,11 @@
     const levelB = rB ** n;
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
+    const count = pulseCount.value;
     const trainValues = [amount];
     for (let i = 1; i <= 120; i++) {
-      trainValues.push(Math.min(1, r * trainValues[i - 1] + (i % spacing === 0 ? amount : 0)));
+      const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
+      trainValues.push(Math.min(1, r * trainValues[i - 1] + (active ? amount : 0)));
     }
     const train = trainValues[n];
 
@@ -126,6 +131,11 @@
     keptLightInfo.textContent = keptLight === null
       ? "No light experiment kept."
       : `Kept: update ${keptLight.n} · first ${100 * keptLight.rA}% · second ${100 * keptLight.rB}% · pulses every ${keptLight.k} updates · pulse ${100 * keptLight.a}% · ${keptLight.rate} updates per second${keptLight.decayUnit === "second" ? " · decay matched per second" : ""}.`;
+    keptPulseCountInfo.textContent = keptLight === null
+      ? "No pulse count kept."
+      : keptLight.additionalpulses === "all"
+        ? "Kept additional pulses: keep adding."
+        : `Kept additional pulses: ${keptLight.additionalpulses}.`;
     curve.setAttribute("points", Array.from({ length: 121 }, (_, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * r ** i).toFixed(3)}`
     ).join(" "));
@@ -197,6 +207,7 @@
     retentionB.value = String(keptLight.rB);
     pulseSpacing.value = String(keptLight.k);
     pulseAmount.value = String(keptLight.a);
+    pulseCount.value = keptLight.additionalpulses;
     updateRate.value = String(keptLight.rate);
     currentRate = keptLight.rate;
     decayUnit.value = keptLight.decayUnit;
@@ -257,6 +268,10 @@
     render();
   });
   pulseAmount.addEventListener("change", () => {
+    pauseForControlChange();
+    render();
+  });
+  pulseCount.addEventListener("change", () => {
     pauseForControlChange();
     render();
   });
