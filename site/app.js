@@ -7,6 +7,11 @@
   const run = document.querySelector("#run");
   const pause = document.querySelector("#pause");
   const updateRate = document.querySelector("#update-rate");
+  const decayUnit = document.querySelector("#decay-unit");
+  const retentionLabel = document.querySelector('label[for="retention"]');
+  const retentionBLabel = document.querySelector('label[for="retention-b"]');
+  const updateLabel = retentionLabel.textContent;
+  const updateBLabel = retentionBLabel.textContent;
   const threshold = document.querySelector("#threshold");
   const seekThreshold = document.querySelector("#seek-threshold");
   const thresholdInfo = document.querySelector("#threshold-info");
@@ -36,6 +41,7 @@
   let keptLight = null;
   let running = false;
   let currentRate = Number(updateRate.value);
+  let currentDecayUnit = decayUnit.value;
   let startN = 0;
   let startTime = 0;
   let rafHandle = null;
@@ -47,22 +53,28 @@
       rB: Number(retentionB.value),
       k: Number(pulseSpacing.value),
       a: Number(pulseAmount.value),
-      rate: currentRate
+      rate: currentRate,
+      decayUnit: currentDecayUnit
     };
   }
 
   function sameExperiment(a, b) {
     return a.n === b.n && a.rA === b.rA && a.rB === b.rB &&
-      a.k === b.k && a.a === b.a && a.rate === b.rate;
+      a.k === b.k && a.a === b.a && a.rate === b.rate &&
+      a.decayUnit === b.decayUnit;
+  }
+
+  function effectiveRetention(raw) {
+    return currentDecayUnit === "second" ? raw ** (30 / currentRate) : raw;
   }
 
   function render() {
     const n = Number(frame.value);
-    const r = Number(retention.value);
+    const r = effectiveRetention(Number(retention.value));
     const level = r ** n;
     const target = Number(threshold.value);
     const firstUpdate = Math.ceil(Math.log(target) / Math.log(r));
-    const rB = Number(retentionB.value);
+    const rB = effectiveRetention(Number(retentionB.value));
     const levelB = rB ** n;
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
@@ -72,6 +84,10 @@
     }
     const train = trainValues[n];
 
+    retentionLabel.textContent = currentDecayUnit === "second"
+      ? "Fraction kept at 30 updates per second" : updateLabel;
+    retentionBLabel.textContent = currentDecayUnit === "second"
+      ? "Second fraction kept at 30 updates per second" : updateBLabel;
     flashLevel.textContent = `Frame ${n} · retained ${(100 * level).toFixed(2)}%.`;
     trainLevel.textContent = `Frame ${n} · pulse-train level ${(100 * train).toFixed(2)}%.`;
     secondLevel.textContent = `Frame ${n} · retained ${(100 * levelB).toFixed(2)}%.`;
@@ -96,7 +112,7 @@
     forgetLight.disabled = keptLight === null;
     keptLightInfo.textContent = keptLight === null
       ? "No light experiment kept."
-      : `Kept: update ${keptLight.n} · first ${100 * keptLight.rA}% · second ${100 * keptLight.rB}% · pulses every ${keptLight.k} updates · pulse ${100 * keptLight.a}% · ${keptLight.rate} updates per second.`;
+      : `Kept: update ${keptLight.n} · first ${100 * keptLight.rA}% · second ${100 * keptLight.rB}% · pulses every ${keptLight.k} updates · pulse ${100 * keptLight.a}% · ${keptLight.rate} updates per second${keptLight.decayUnit === "second" ? " · decay matched per second" : ""}.`;
     curve.setAttribute("points", Array.from({ length: 121 }, (_, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * r ** i).toFixed(3)}`
     ).join(" "));
@@ -170,6 +186,8 @@
     pulseAmount.value = String(keptLight.a);
     updateRate.value = String(keptLight.rate);
     currentRate = keptLight.rate;
+    decayUnit.value = keptLight.decayUnit;
+    currentDecayUnit = keptLight.decayUnit;
     playStatus.textContent = "Paused.";
     render();
   });
@@ -181,7 +199,7 @@
   threshold.addEventListener("change", render);
   seekThreshold.addEventListener("click", () => {
     const target = Number(threshold.value);
-    const firstUpdate = Math.ceil(Math.log(target) / Math.log(Number(retention.value)));
+    const firstUpdate = Math.ceil(Math.log(target) / Math.log(effectiveRetention(Number(retention.value))));
     if (running || firstUpdate > 120) return;
     frame.value = String(firstUpdate);
     render();
@@ -189,6 +207,11 @@
   updateRate.addEventListener("change", () => {
     pauseForControlChange();
     currentRate = Number(updateRate.value);
+    render();
+  });
+  decayUnit.addEventListener("change", () => {
+    pauseForControlChange();
+    currentDecayUnit = decayUnit.value;
     render();
   });
   frame.addEventListener("input", () => {

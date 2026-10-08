@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=4">
-  <script src="/app.js?v=9" defer></script>
+  <script src="/app.js?v=10" defer></script>
 </head>
 <body>
   <main>
@@ -39,6 +39,14 @@
           <option value="30" selected>30 updates per second</option>
           <option value="60">60 updates per second</option>
         </select>
+      </div>
+      <div class="control">
+        <label for="decay-unit">What stays the same</label>
+        <select id="decay-unit">
+          <option value="update" selected>Fraction per update</option>
+          <option value="second">Decay per second</option>
+        </select>
+        <p id="decay-unit-help" class="muted">Matching seconds changes the fraction used at each update. Only decay is matched; pulse spacing is still in updates.</p>
       </div>
       <div class="actions">
         <button id="seek-threshold" type="button">Go to this level</button>
