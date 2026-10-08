@@ -110,6 +110,12 @@ input[type="range"] {
   font-weight: 700;
 }
 
+#pulse-arithmetic,
+#pulse-arithmetic-help {
+  font: inherit;
+  overflow-wrap: anywhere;
+}
+
 .muted,
 .note {
   color: #b8bcc6;

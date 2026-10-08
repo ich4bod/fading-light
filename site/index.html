@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=4">
-  <script src="/app.js?v=12" defer></script>
+  <link rel="stylesheet" href="/style.css?v=5">
+  <script src="/app.js?v=13" defer></script>
 </head>
 <body>
   <main>
@@ -140,6 +140,8 @@
       </div>
       <p id="pulse-slot-help" class="muted">Inspect the scheduled pulse updates without running the clock. These slots remain even when a finite burst stops adding pulses.</p>
       <p id="train-level" class="readout" aria-live="polite">Frame 0 · pulse-train level 35.00%.</p>
+      <p id="pulse-arithmetic">No added pulse has occurred after the initial level.</p>
+      <p id="pulse-arithmetic-help" class="muted">This is the most recent added pulse, not the level at every later update. Clipped level is discarded by the toy’s cap.</p>
       <div class="lamp" role="img" aria-label="Mathematical pulse-train level">
         <div id="train-glow" class="glow"></div>
       </div>

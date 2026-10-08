@@ -29,6 +29,7 @@
   const pulseAmount = document.querySelector("#pulse-amount");
   const pulseCount = document.querySelector("#pulse-count");
   const trainLevel = document.querySelector("#train-level");
+  const pulseArithmetic = document.querySelector("#pulse-arithmetic");
   const trainGlow = document.querySelector("#train-glow");
   const curve = document.querySelector("#flash-curve");
   const curveB = document.querySelector("#second-curve");
@@ -94,11 +95,20 @@
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
     const trainValues = [amount];
+    let lastPulse = null;
     for (let i = 1; i <= 120; i++) {
       const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
       trainValues.push(Math.min(1, r * trainValues[i - 1] + (active ? amount : 0)));
+      if (active && i <= n) lastPulse = i;
     }
     const train = trainValues[n];
+    if (lastPulse === null) {
+      pulseArithmetic.textContent = "No added pulse has occurred after the initial level.";
+    } else {
+      const decayed = r * trainValues[lastPulse - 1];
+      const clipped = Math.max(0, decayed + amount - 1);
+      pulseArithmetic.textContent = `Pulse at update ${lastPulse}: after decay ${(100 * decayed).toFixed(2)}% + pulse ${(100 * amount).toFixed(2)}% − clipped ${(100 * clipped).toFixed(2)}% = ${(100 * trainValues[lastPulse]).toFixed(2)}%.`;
+    }
 
     retentionLabel.textContent = currentDecayUnit === "second"
       ? "Fraction kept at 30 updates per second" : updateLabel;
