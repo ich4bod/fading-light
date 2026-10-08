@@ -29,6 +29,9 @@
   const pulseAmount = document.querySelector("#pulse-amount");
   const pulseCount = document.querySelector("#pulse-count");
   const seekFirstCap = document.querySelector("#seek-first-cap");
+  const trainTailFraction = document.querySelector("#train-tail-fraction");
+  const trainTailSeek = document.querySelector("#train-tail-seek");
+  const trainTailInfo = document.querySelector("#train-tail-info");
   const trainLevel = document.querySelector("#train-level");
   const pulseArithmetic = document.querySelector("#pulse-arithmetic");
   const trainGlow = document.querySelector("#train-glow");
@@ -101,6 +104,34 @@
     return values.findIndex((value, i) => i >= 1 && value === 1);
   }
 
+  function firstQuietUpdate(values, count, spacing, fraction) {
+    if (count === "all") return { finalPulse: null, candidate: null };
+    const finalPulse = Number(count) * spacing;
+    if (finalPulse > 120) return { finalPulse, candidate: null };
+    const threshold = values[finalPulse] * fraction;
+    for (let j = finalPulse + 1; j <= 120; j++) {
+      if (values[j] < threshold) return { finalPulse, candidate: j };
+    }
+    return { finalPulse, candidate: null };
+  }
+
+  function currentTail(values) {
+    return firstQuietUpdate(values, pulseCount.value, Number(pulseSpacing.value),
+      Number(trainTailFraction.value));
+  }
+
+  function renderTailInspector(values, n) {
+    const { finalPulse, candidate } = currentTail(values);
+    trainTailSeek.disabled = candidate === null || candidate === n;
+    trainTailInfo.textContent = finalPulse === null
+      ? "A continuing train has no final pulse."
+      : finalPulse > 120
+        ? "The final pulse lies beyond update 120."
+        : candidate === null
+          ? `Final pulse: update ${finalPulse} · no such update through 120.`
+          : `Final pulse: update ${finalPulse} · first below ${100 * Number(trainTailFraction.value)}% of that peak: update ${candidate}.`;
+  }
+
   function render() {
     const n = Number(frame.value);
     const r = effectiveRetention(Number(retention.value));
@@ -113,6 +144,7 @@
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
     const trainValues = pulseTrainValues();
+    renderTailInspector(trainValues, n);
     let lastPulse = null;
     for (let i = 1; i <= n; i++) {
       const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
@@ -185,24 +217,24 @@
     secondCursor.setAttribute("cy", String(144 - 128 * levelB));
   }
 
-  function stopPlayback(status) {
+  function stopPlayback(status, refresh = true) {
     if (rafHandle !== null) {
       cancelAnimationFrame(rafHandle);
       rafHandle = null;
     }
     running = false;
     playStatus.textContent = status;
-    render();
+    if (refresh) render();
   }
 
-  function updateFromElapsed(now) {
+  function updateFromElapsed(now, refresh = true) {
     const n = Math.min(120, startN + Math.floor((now - startTime) * currentRate / 1000));
     if (n !== Number(frame.value)) {
       frame.value = String(n);
-      render();
+      if (refresh) render();
     }
     if (n === 120) {
-      stopPlayback("Finished at frame 120.");
+      stopPlayback("Finished at frame 120.", refresh);
       return false;
     }
     return true;
@@ -214,13 +246,13 @@
     if (updateFromElapsed(now)) rafHandle = requestAnimationFrame(playbackFrame);
   }
 
-  function pauseForControlChange() {
+  function pauseForControlChange(refresh = true) {
     if (running) {
-      updateFromElapsed(performance.now());
-      if (running) stopPlayback("Paused.");
+      updateFromElapsed(performance.now(), refresh);
+      if (running) stopPlayback("Paused.", refresh);
     } else {
       playStatus.textContent = "Paused.";
-      render();
+      if (refresh) render();
     }
   }
 
@@ -308,6 +340,18 @@
     if (firstCap === -1 || firstCap === Number(frame.value)) return;
     frame.value = String(firstCap);
     render();
+  });
+  trainTailSeek.addEventListener("click", () => {
+    const { candidate } = currentTail(pulseTrainValues());
+    if (candidate === null || candidate === Number(frame.value)) return;
+    pauseForControlChange(false);
+    const tail = currentTail(pulseTrainValues());
+    if (tail.candidate !== null) frame.value = String(tail.candidate);
+    render();
+  });
+  trainTailFraction.addEventListener("change", () => {
+    if (running) stopPlayback("Paused.");
+    else renderTailInspector(pulseTrainValues(), Number(frame.value));
   });
   pulseCount.addEventListener("change", () => {
     pauseForControlChange();
