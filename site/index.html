@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=5">
-  <script src="/app.js?v=13" defer></script>
+  <script src="/app.js?v=14" defer></script>
 </head>
 <body>
   <main>
@@ -125,6 +125,10 @@
           <option value="all" selected>Keep adding</option>
         </select>
         <p id="pulse-count-help" class="muted">The initial level is always present. After the chosen additional pulses, only decay remains.</p>
+        <div class="actions">
+          <button id="seek-first-cap" type="button">Inspect the first capped pulse</button>
+        </div>
+        <p id="seek-first-cap-help" class="muted">Seek the first update at one in this 120-update experiment. If no pulse reaches the cap, this action is unavailable.</p>
       </div>
       <div class="control">
         <label for="pulse-spacing">Updates between pulses</label>

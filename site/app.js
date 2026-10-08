@@ -28,6 +28,7 @@
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
   const pulseAmount = document.querySelector("#pulse-amount");
   const pulseCount = document.querySelector("#pulse-count");
+  const seekFirstCap = document.querySelector("#seek-first-cap");
   const trainLevel = document.querySelector("#train-level");
   const pulseArithmetic = document.querySelector("#pulse-arithmetic");
   const trainGlow = document.querySelector("#train-glow");
@@ -83,6 +84,23 @@
     return next <= 120 ? next : null;
   }
 
+  function pulseTrainValues() {
+    const r = effectiveRetention(Number(retention.value));
+    const spacing = Number(pulseSpacing.value);
+    const amount = Number(pulseAmount.value);
+    const count = pulseCount.value;
+    const values = [amount];
+    for (let i = 1; i <= 120; i++) {
+      const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
+      values.push(Math.min(1, r * values[i - 1] + (active ? amount : 0)));
+    }
+    return values;
+  }
+
+  function firstCappedPulse(values) {
+    return values.findIndex((value, i) => i >= 1 && value === 1);
+  }
+
   function render() {
     const n = Number(frame.value);
     const r = effectiveRetention(Number(retention.value));
@@ -94,13 +112,14 @@
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
-    const trainValues = [amount];
+    const trainValues = pulseTrainValues();
     let lastPulse = null;
-    for (let i = 1; i <= 120; i++) {
+    for (let i = 1; i <= n; i++) {
       const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
-      trainValues.push(Math.min(1, r * trainValues[i - 1] + (active ? amount : 0)));
-      if (active && i <= n) lastPulse = i;
+      if (active) lastPulse = i;
     }
+    const firstCap = firstCappedPulse(trainValues);
+    seekFirstCap.disabled = firstCap === -1 || firstCap === n;
     const train = trainValues[n];
     if (lastPulse === null) {
       pulseArithmetic.textContent = "No added pulse has occurred after the initial level.";
@@ -279,6 +298,15 @@
   });
   pulseAmount.addEventListener("change", () => {
     pauseForControlChange();
+    render();
+  });
+  seekFirstCap.addEventListener("click", () => {
+    const candidate = firstCappedPulse(pulseTrainValues());
+    if (candidate === -1 || candidate === Number(frame.value)) return;
+    pauseForControlChange();
+    const firstCap = firstCappedPulse(pulseTrainValues());
+    if (firstCap === -1 || firstCap === Number(frame.value)) return;
+    frame.value = String(firstCap);
     render();
   });
   pulseCount.addEventListener("change", () => {
