@@ -155,6 +155,23 @@ input[type="range"] {
   background: #e9755c;
 }
 
+.small-pulses #pulse-parts {
+  margin-top: 12px;
+}
+
+#pulse-parts summary {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  cursor: pointer;
+}
+
+#pulse-parts-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .chart-section {
   margin-top: 8px;
 }

@@ -28,6 +28,9 @@
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
   const pulseAmount = document.querySelector("#pulse-amount");
   const pulseCount = document.querySelector("#pulse-count");
+  const pulsePartsLast = document.querySelector("#pulse-parts-last");
+  const pulsePartsEarlier = document.querySelector("#pulse-parts-earlier");
+  const pulsePartsReadout = document.querySelector("#pulse-parts-readout");
   const seekFirstCap = document.querySelector("#seek-first-cap");
   const trainTailFraction = document.querySelector("#train-tail-fraction");
   const trainTailSeek = document.querySelector("#train-tail-seek");
@@ -120,6 +123,20 @@
       Number(trainTailFraction.value));
   }
 
+  function pulseParts(values, n, r, spacing, amount, count) {
+    let j = 0;
+    let accepted = amount;
+    for (let i = 1; i <= n; i++) {
+      const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
+      if (active) {
+        j = i;
+        accepted = Math.min(amount, 1 - r * values[i - 1]);
+      }
+    }
+    const last = accepted * r ** (n - j);
+    return { j, last, earlier: Math.max(0, values[n] - last) };
+  }
+
   function renderTailInspector(values, n) {
     const { finalPulse, candidate } = currentTail(values);
     trainTailSeek.disabled = candidate === null || candidate === n;
@@ -153,6 +170,13 @@
     const firstCap = firstCappedPulse(trainValues);
     seekFirstCap.disabled = firstCap === -1 || firstCap === n;
     const train = trainValues[n];
+    const parts = pulseParts(trainValues, n, r, spacing, amount, count);
+    const lastWidth = 296 * parts.last;
+    const earlierWidth = 296 * parts.earlier;
+    pulsePartsLast.setAttribute("width", String(lastWidth));
+    pulsePartsEarlier.setAttribute("x", String(12 + lastWidth));
+    pulsePartsEarlier.setAttribute("width", String(earlierWidth));
+    pulsePartsReadout.textContent = `The last pulse at update ${parts.j} contributes ${(100 * parts.last).toFixed(2)}% here; earlier pulses contribute ${(100 * parts.earlier).toFixed(2)}%.`;
     if (lastPulse === null) {
       pulseArithmetic.textContent = "No added pulse has occurred after the initial level.";
     } else {

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=5">
-  <script src="/app.js?v=15" defer></script>
+  <link rel="stylesheet" href="/style.css?v=6">
+  <script src="/app.js?v=16" defer></script>
 </head>
 <body>
   <main>
@@ -147,6 +147,15 @@
         <div id="train-glow" class="glow"></div>
       </div>
       <p id="pulse-amount-rule">Each pulse adds the chosen level after decay. The train stops at one; extra level is clipped.</p>
+      <details id="pulse-parts">
+        <summary>Where the current light came from</summary>
+        <svg id="pulse-parts-chart" viewBox="0 0 320 60" aria-hidden="true">
+          <rect id="pulse-parts-last" x="12" y="20" width="0" height="20" fill="#ffd166"></rect>
+          <rect id="pulse-parts-earlier" x="12" y="20" width="0" height="20" fill="#e9755c"></rect>
+        </svg>
+        <p id="pulse-parts-readout">The last pulse at update 0 contributes 0.00% here; earlier pulses contribute 0.00%.</p>
+        <p id="pulse-parts-help" class="muted">Gold is the accepted part of the last pulse, after its later decay. Coral is earlier light. Both share the same zero-to-one scale; clipped input was never stored.</p>
+      </details>
     </section>
 
     <section class="chart-section">
