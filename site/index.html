@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=6">
-  <script src="/app.js?v=16" defer></script>
+  <script src="/app.js?v=17" defer></script>
 </head>
 <body>
   <main>
@@ -58,7 +58,9 @@
       <div class="actions playback-actions">
         <button id="run" type="button">Run at 30 updates per second</button>
         <button id="pause" type="button" disabled>Pause</button>
+        <button id="run-next-pulse" type="button">Run through the next pulse</button>
       </div>
+      <p id="run-next-pulse-help" class="muted">Run until the next pulse has been added, then pause on its result. The initial level does not count as the next pulse.</p>
     </section>
 
     <p id="flash-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>

@@ -6,6 +6,7 @@
   const advance = document.querySelector("#advance");
   const run = document.querySelector("#run");
   const pause = document.querySelector("#pause");
+  const runNextPulse = document.querySelector("#run-next-pulse");
   const updateRate = document.querySelector("#update-rate");
   const decayUnit = document.querySelector("#decay-unit");
   const retentionLabel = document.querySelector('label[for="retention"]');
@@ -56,6 +57,8 @@
   let currentDecayUnit = decayUnit.value;
   let startN = 0;
   let startTime = 0;
+  let runStopUpdate = 120;
+  let specialPulseStop = false;
   let rafHandle = null;
 
   function currentExperiment() {
@@ -88,6 +91,15 @@
   function nextPulseSlot(n, spacing) {
     const next = (Math.floor(n / spacing) + 1) * spacing;
     return next <= 120 ? next : null;
+  }
+
+  function nextEligiblePulse(n) {
+    const spacing = Number(pulseSpacing.value);
+    const count = pulseCount.value;
+    for (let j = n + 1; j <= 120; j++) {
+      if (j % spacing === 0 && (count === "all" || j / spacing <= Number(count))) return j;
+    }
+    return null;
   }
 
   function pulseTrainValues() {
@@ -208,6 +220,7 @@
     pulseSlotPrevious.disabled = previousPulseSlot(n, spacing) === null;
     pulseSlotNext.disabled = nextPulseSlot(n, spacing) === null;
     run.disabled = running || n === 120;
+    runNextPulse.disabled = running || nextEligiblePulse(n) === null;
     pause.disabled = !running;
     keepLight.disabled = running;
     returnLight.disabled = running || keptLight === null ||
@@ -247,15 +260,21 @@
       rafHandle = null;
     }
     running = false;
+    runStopUpdate = 120;
+    specialPulseStop = false;
     playStatus.textContent = status;
     if (refresh) render();
   }
 
   function updateFromElapsed(now, refresh = true) {
-    const n = Math.min(120, startN + Math.floor((now - startTime) * currentRate / 1000));
+    const n = Math.min(runStopUpdate, startN + Math.floor((now - startTime) * currentRate / 1000));
     if (n !== Number(frame.value)) {
       frame.value = String(n);
       if (refresh) render();
+    }
+    if (specialPulseStop && n === runStopUpdate) {
+      stopPlayback(`Paused at pulse update ${n}.`, refresh);
+      return false;
     }
     if (n === 120) {
       stopPlayback("Finished at frame 120.", refresh);
@@ -275,6 +294,8 @@
       updateFromElapsed(performance.now(), refresh);
       if (running) stopPlayback("Paused.", refresh);
     } else {
+      runStopUpdate = 120;
+      specialPulseStop = false;
       playStatus.textContent = "Paused.";
       if (refresh) render();
     }
@@ -391,14 +412,26 @@
     frame.value = String(Math.min(120, Number(frame.value) + 1));
     render();
   });
-  run.addEventListener("click", () => {
-    if (running || Number(frame.value) === 120) return;
+  function startPlayback(stopUpdate, stopAtPulse = false) {
     startN = Number(frame.value);
     startTime = performance.now();
+    runStopUpdate = stopUpdate;
+    specialPulseStop = stopAtPulse;
     running = true;
     playStatus.textContent = `Running at ${currentRate} updates per second.`;
     render();
     rafHandle = requestAnimationFrame(playbackFrame);
+  }
+
+  run.addEventListener("click", () => {
+    if (running || Number(frame.value) === 120) return;
+    startPlayback(120);
+  });
+  runNextPulse.addEventListener("click", () => {
+    if (running) return;
+    const target = nextEligiblePulse(Number(frame.value));
+    if (target === null) return;
+    startPlayback(target, true);
   });
   pause.addEventListener("click", () => {
     if (!running) return;
