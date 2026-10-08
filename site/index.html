@@ -61,32 +61,19 @@
       </div>
     </section>
 
-    <section id="light-memory" aria-labelledby="light-memory-title">
-      <h2 id="light-memory-title">Keep one experiment</h2>
-      <div class="actions">
-        <button id="keep-light" type="button">Keep this experiment</button>
-        <button id="return-light" type="button">Return to kept experiment</button>
-        <button id="forget-light" type="button">Forget kept experiment</button>
-      </div>
-      <p id="kept-light-info" class="muted">No light experiment kept.</p>
-      <p id="kept-pulse-count-info" class="muted">No pulse count kept.</p>
-      <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
-    </section>
+    <p id="flash-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
+    <div id="first-flash-lamp" class="lamp" role="img" aria-label="Mathematical flash level">
+      <div id="flash-glow" class="glow"></div>
+    </div>
 
     <p id="threshold-info" class="muted">First whole update at or below 50%: 35.</p>
     <p id="threshold-help" class="muted">A crossing between updates is rounded up. A level beyond this strip cannot be reached here.</p>
     <p id="play-status" class="muted" aria-live="polite">Paused.</p>
     <p>Playback uses elapsed time, not the number of screen redraws. Pause or move the update slider to inspect a pulse.</p>
-
-    <p id="flash-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
     <p id="time-unit" class="muted">At 30 updates per second, frame 0 corresponds to 0.00 seconds.</p>
     <p id="half-level" class="muted">Half the starting level after 34.31 updates.</p>
     <p id="half-time" class="muted">At this rate, half the starting level takes 1.14 seconds.</p>
     <p id="rate-help" class="muted">Changing the rate pauses playback. The same update number keeps the same level; only its time in seconds changes.</p>
-
-    <div class="lamp" role="img" aria-label="Mathematical flash level">
-      <div id="flash-glow" class="glow"></div>
-    </div>
 
     <section class="second-flash" aria-labelledby="second-title">
       <h2 id="second-title">A second flash</h2>
@@ -173,6 +160,18 @@
         <circle id="second-cursor" r="4" fill="#e9755c" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
       </svg>
       <p id="curve-cursor-help">The dotted line is this update. The two dots are the levels in the lamps above.</p>
+    </section>
+
+    <section id="light-memory" aria-labelledby="light-memory-title">
+      <h2 id="light-memory-title">Keep one experiment</h2>
+      <div class="actions">
+        <button id="keep-light" type="button">Keep this experiment</button>
+        <button id="return-light" type="button">Return to kept experiment</button>
+        <button id="forget-light" type="button">Forget kept experiment</button>
+      </div>
+      <p id="kept-light-info" class="muted">No light experiment kept.</p>
+      <p id="kept-pulse-count-info" class="muted">No pulse count kept.</p>
+      <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
     </section>
 
     <p class="note">Updates are not seconds. This is a mathematical light, not a model of a display or a sound.</p>
