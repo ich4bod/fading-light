@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=3">
-  <script src="/app.js?v=8" defer></script>
+  <link rel="stylesheet" href="/style.css?v=4">
+  <script src="/app.js?v=9" defer></script>
 </head>
 <body>
   <main>
@@ -51,6 +51,17 @@
         <button id="run" type="button">Run at 30 updates per second</button>
         <button id="pause" type="button" disabled>Pause</button>
       </div>
+    </section>
+
+    <section id="light-memory" aria-labelledby="light-memory-title">
+      <h2 id="light-memory-title">Keep one experiment</h2>
+      <div class="actions">
+        <button id="keep-light" type="button">Keep this experiment</button>
+        <button id="return-light" type="button">Return to kept experiment</button>
+        <button id="forget-light" type="button">Forget kept experiment</button>
+      </div>
+      <p id="kept-light-info" class="muted">No light experiment kept.</p>
+      <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
     </section>
 
     <p id="threshold-info" class="muted">First whole update at or below 50%: 35.</p>

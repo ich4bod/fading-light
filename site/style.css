@@ -132,7 +132,8 @@ input[type="range"] {
 }
 
 .second-flash,
-.small-pulses {
+.small-pulses,
+#light-memory {
   margin-top: 20px;
 }
 

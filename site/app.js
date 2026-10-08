@@ -28,12 +28,33 @@
   const updateCursor = document.querySelector("#update-cursor");
   const flashCursor = document.querySelector("#flash-cursor");
   const secondCursor = document.querySelector("#second-cursor");
+  const keepLight = document.querySelector("#keep-light");
+  const returnLight = document.querySelector("#return-light");
+  const forgetLight = document.querySelector("#forget-light");
+  const keptLightInfo = document.querySelector("#kept-light-info");
 
+  let keptLight = null;
   let running = false;
   let currentRate = Number(updateRate.value);
   let startN = 0;
   let startTime = 0;
   let rafHandle = null;
+
+  function currentExperiment() {
+    return {
+      n: Number(frame.value),
+      rA: Number(retention.value),
+      rB: Number(retentionB.value),
+      k: Number(pulseSpacing.value),
+      a: Number(pulseAmount.value),
+      rate: currentRate
+    };
+  }
+
+  function sameExperiment(a, b) {
+    return a.n === b.n && a.rA === b.rA && a.rB === b.rB &&
+      a.k === b.k && a.a === b.a && a.rate === b.rate;
+  }
 
   function render() {
     const n = Number(frame.value);
@@ -69,6 +90,13 @@
     advance.disabled = n === 120;
     run.disabled = running || n === 120;
     pause.disabled = !running;
+    keepLight.disabled = running;
+    returnLight.disabled = running || keptLight === null ||
+      sameExperiment(currentExperiment(), keptLight);
+    forgetLight.disabled = keptLight === null;
+    keptLightInfo.textContent = keptLight === null
+      ? "No light experiment kept."
+      : `Kept: update ${keptLight.n} · first ${100 * keptLight.rA}% · second ${100 * keptLight.rB}% · pulses every ${keptLight.k} updates · pulse ${100 * keptLight.a}% · ${keptLight.rate} updates per second.`;
     curve.setAttribute("points", Array.from({ length: 121 }, (_, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * r ** i).toFixed(3)}`
     ).join(" "));
@@ -127,6 +155,28 @@
       render();
     }
   }
+
+  keepLight.addEventListener("click", () => {
+    if (running) return;
+    keptLight = currentExperiment();
+    render();
+  });
+  returnLight.addEventListener("click", () => {
+    if (running || keptLight === null || sameExperiment(currentExperiment(), keptLight)) return;
+    frame.value = String(keptLight.n);
+    retention.value = String(keptLight.rA);
+    retentionB.value = String(keptLight.rB);
+    pulseSpacing.value = String(keptLight.k);
+    pulseAmount.value = String(keptLight.a);
+    updateRate.value = String(keptLight.rate);
+    currentRate = keptLight.rate;
+    playStatus.textContent = "Paused.";
+    render();
+  });
+  forgetLight.addEventListener("click", () => {
+    keptLight = null;
+    render();
+  });
 
   threshold.addEventListener("change", render);
   seekThreshold.addEventListener("click", () => {
