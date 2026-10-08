@@ -24,6 +24,8 @@
   const glowB = document.querySelector("#second-glow");
   const secondLevel = document.querySelector("#second-level");
   const pulseSpacing = document.querySelector("#pulse-spacing");
+  const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
+  const pulseSlotNext = document.querySelector("#pulse-slot-next");
   const pulseAmount = document.querySelector("#pulse-amount");
   const trainLevel = document.querySelector("#train-level");
   const trainGlow = document.querySelector("#train-glow");
@@ -68,6 +70,15 @@
     return currentDecayUnit === "second" ? raw ** (30 / currentRate) : raw;
   }
 
+  function previousPulseSlot(n, spacing) {
+    return n === 0 ? null : Math.floor((n - 1) / spacing) * spacing;
+  }
+
+  function nextPulseSlot(n, spacing) {
+    const next = (Math.floor(n / spacing) + 1) * spacing;
+    return next <= 120 ? next : null;
+  }
+
   function render() {
     const n = Number(frame.value);
     const r = effectiveRetention(Number(retention.value));
@@ -104,6 +115,8 @@
     trainGlow.style.opacity = String(train);
     rewind.disabled = n === 0;
     advance.disabled = n === 120;
+    pulseSlotPrevious.disabled = previousPulseSlot(n, spacing) === null;
+    pulseSlotNext.disabled = nextPulseSlot(n, spacing) === null;
     run.disabled = running || n === 120;
     pause.disabled = !running;
     keepLight.disabled = running;
@@ -229,6 +242,18 @@
   });
   pulseSpacing.addEventListener("change", () => {
     pauseForControlChange();
+    render();
+  });
+  pulseSlotPrevious.addEventListener("click", () => {
+    pauseForControlChange();
+    const previous = previousPulseSlot(Number(frame.value), Number(pulseSpacing.value));
+    if (previous !== null) frame.value = String(previous);
+    render();
+  });
+  pulseSlotNext.addEventListener("click", () => {
+    pauseForControlChange();
+    const next = nextPulseSlot(Number(frame.value), Number(pulseSpacing.value));
+    if (next !== null) frame.value = String(next);
     render();
   });
   pulseAmount.addEventListener("change", () => {

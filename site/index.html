@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=4">
-  <script src="/app.js?v=10" defer></script>
+  <script src="/app.js?v=11" defer></script>
 </head>
 <body>
   <main>
@@ -122,6 +122,11 @@
           <option value="48">48 updates</option>
         </select>
       </div>
+      <div class="actions">
+        <button id="pulse-slot-previous" type="button">Previous pulse slot</button>
+        <button id="pulse-slot-next" type="button">Next pulse slot</button>
+      </div>
+      <p id="pulse-slot-help" class="muted">Inspect the scheduled pulse updates without running the clock. These slots remain even when a finite burst stops adding pulses.</p>
       <p id="train-level" class="readout" aria-live="polite">Frame 0 · pulse-train level 35.00%.</p>
       <div class="lamp" role="img" aria-label="Mathematical pulse-train level">
         <div id="train-glow" class="glow"></div>
