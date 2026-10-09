@@ -143,6 +143,21 @@ input[type="range"] {
   margin-top: 20px;
 }
 
+#light-memory .kept-curve-toggle {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+#light-show-kept-curve {
+  min-width: 20px;
+  min-height: 20px;
+  margin: 0;
+  accent-color: #fff3dc;
+}
+
 .second-flash .control {
   max-width: 360px;
 }
@@ -187,7 +202,8 @@ input[type="range"] {
   accent-color: #ffd166;
 }
 
-#train-uncapped-plot[hidden] {
+#train-uncapped-plot[hidden],
+#kept-flash-curve[hidden] {
   display: none;
 }
 

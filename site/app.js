@@ -59,6 +59,8 @@
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");
   const keptPulseCountInfo = document.querySelector("#kept-pulse-count-info");
+  const showKeptCurve = document.querySelector("#light-show-kept-curve");
+  const keptCurve = document.querySelector("#kept-flash-curve");
 
   let keptLight = null;
   let running = false;
@@ -265,6 +267,8 @@
     returnLight.disabled = running || keptLight === null ||
       sameExperiment(currentExperiment(), keptLight);
     forgetLight.disabled = keptLight === null;
+    showKeptCurve.disabled = keptLight === null;
+    keptCurve.toggleAttribute("hidden", keptLight === null || !showKeptCurve.checked);
     keptLightInfo.textContent = keptLight === null
       ? "No light experiment kept."
       : `Kept: update ${keptLight.n} · first ${100 * keptLight.rA}% · second ${100 * keptLight.rB}% · pulses every ${keptLight.k} updates · pulse ${100 * keptLight.a}% · ${keptLight.rate} updates per second${keptLight.decayUnit === "second" ? " · decay matched per second" : ""}.`;
@@ -284,6 +288,13 @@
     curveB.setAttribute("points", Array.from({ length: 121 }, (_, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * rB ** i).toFixed(3)}`
     ).join(" "));
+    if (keptLight !== null) {
+      const keptRetention = keptLight.decayUnit === "second"
+        ? keptLight.rA ** (30 / keptLight.rate) : keptLight.rA;
+      keptCurve.setAttribute("points", Array.from({ length: 121 }, (_, i) =>
+        `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * keptRetention ** i).toFixed(3)}`
+      ).join(" "));
+    }
     trainCurve.setAttribute("points", trainValues.map((value, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * value).toFixed(3)}`
     ).join(" "));
@@ -377,8 +388,10 @@
   });
   forgetLight.addEventListener("click", () => {
     keptLight = null;
+    showKeptCurve.checked = false;
     render();
   });
+  showKeptCurve.addEventListener("change", render);
 
   seekFlashGap.addEventListener("click", () => {
     const flashGap = bestFlashGap(

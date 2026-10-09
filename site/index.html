@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=8">
-  <script src="/app.js?v=20" defer></script>
+  <link rel="stylesheet" href="/style.css?v=9">
+  <script src="/app.js?v=21" defer></script>
 </head>
 <body>
   <main>
@@ -192,6 +192,7 @@
         <polyline id="flash-curve" stroke="#ffd166" stroke-width="2" fill="none"></polyline>
         <polyline id="second-curve" stroke="#e9755c" stroke-width="2" fill="none"></polyline>
         <polyline id="train-curve" stroke="#b8bcc6" stroke-width="2" stroke-dasharray="4 3" fill="none"></polyline>
+        <polyline id="kept-flash-curve" stroke="#fff3dc" stroke-width="2" stroke-dasharray="4 3" fill="none" hidden></polyline>
         <line id="update-cursor" stroke="#b8bcc6" stroke-width="1" stroke-dasharray="3 3" pointer-events="none" aria-hidden="true"></line>
         <circle id="flash-cursor" r="4" fill="#ffd166" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
         <circle id="second-cursor" r="4" fill="#e9755c" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
@@ -209,6 +210,11 @@
       <p id="kept-light-info" class="muted">No light experiment kept.</p>
       <p id="kept-pulse-count-info" class="muted">No pulse count kept.</p>
       <p id="kept-pulse-pattern-info" class="muted">No pulse pattern kept.</p>
+      <label class="kept-curve-toggle" for="light-show-kept-curve">
+        <input id="light-show-kept-curve" type="checkbox" disabled>
+        Show the kept first flash on the chart
+      </label>
+      <p id="kept-flash-curve-help" class="muted">Dashed cream is the first flash you kept, using its own saved decay rule and update rate. The working flashes and lamps stay as they are.</p>
       <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
     </section>
 
