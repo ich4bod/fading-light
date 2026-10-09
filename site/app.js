@@ -24,6 +24,8 @@
   const glow = document.querySelector("#flash-glow");
   const glowB = document.querySelector("#second-glow");
   const secondLevel = document.querySelector("#second-level");
+  const seekFlashGap = document.querySelector("#seek-flash-gap");
+  const flashGapInfo = document.querySelector("#flash-gap-info");
   const pulseSpacing = document.querySelector("#pulse-spacing");
   const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
@@ -82,6 +84,15 @@
 
   function effectiveRetention(raw) {
     return currentDecayUnit === "second" ? raw ** (30 / currentRate) : raw;
+  }
+
+  function bestFlashGap(rA, rB) {
+    let best = { n: 0, gap: 0 };
+    for (let n = 0; n <= 120; n++) {
+      const gap = Math.abs(rA ** n - rB ** n);
+      if (gap > best.gap) best = { n, gap };
+    }
+    return best;
   }
 
   function previousPulseSlot(n, spacing) {
@@ -204,6 +215,8 @@
     flashLevel.textContent = `Frame ${n} · retained ${(100 * level).toFixed(2)}%.`;
     trainLevel.textContent = `Frame ${n} · pulse-train level ${(100 * train).toFixed(2)}%.`;
     secondLevel.textContent = `Frame ${n} · retained ${(100 * levelB).toFixed(2)}%.`;
+    const flashGap = bestFlashGap(r, rB);
+    flashGapInfo.textContent = `Largest flash gap in this strip: ${(100 * flashGap.gap).toFixed(2)} percentage points at update ${flashGap.n}.`;
     halfLevel.textContent = `Half the starting level after ${(Math.log(0.5) / Math.log(r)).toFixed(2)} updates.`;
     thresholdInfo.textContent = firstUpdate > 120
       ? "This level is beyond the 120-update strip."
@@ -323,6 +336,16 @@
   });
   forgetLight.addEventListener("click", () => {
     keptLight = null;
+    render();
+  });
+
+  seekFlashGap.addEventListener("click", () => {
+    const flashGap = bestFlashGap(
+      effectiveRetention(Number(retention.value)),
+      effectiveRetention(Number(retentionB.value))
+    );
+    pauseForControlChange(false);
+    frame.value = String(flashGap.n);
     render();
   });
 
