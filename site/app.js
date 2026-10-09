@@ -44,6 +44,11 @@
   const curve = document.querySelector("#flash-curve");
   const curveB = document.querySelector("#second-curve");
   const trainCurve = document.querySelector("#train-curve");
+  const showUncapped = document.querySelector("#train-show-uncapped");
+  const uncappedPlot = document.querySelector("#train-uncapped-plot");
+  const uncappedCurve = document.querySelector("#train-uncapped-curve");
+  const cappedReference = document.querySelector("#train-capped-reference");
+  const uncappedScale = document.querySelector("#train-uncapped-scale");
   const updateCursor = document.querySelector("#update-cursor");
   const flashCursor = document.querySelector("#flash-cursor");
   const secondCursor = document.querySelector("#second-cursor");
@@ -104,11 +109,15 @@
     return next <= 120 ? next : null;
   }
 
+  function activePulse(i, spacing, count) {
+    return i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
+  }
+
   function nextEligiblePulse(n) {
     const spacing = Number(pulseSpacing.value);
     const count = pulseCount.value;
     for (let j = n + 1; j <= 120; j++) {
-      if (j % spacing === 0 && (count === "all" || j / spacing <= Number(count))) return j;
+      if (activePulse(j, spacing, count)) return j;
     }
     return null;
   }
@@ -118,12 +127,14 @@
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
-    const values = [amount];
+    const capped = [amount];
+    const uncapped = [amount];
     for (let i = 1; i <= 120; i++) {
-      const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
-      values.push(Math.min(1, r * values[i - 1] + (active ? amount : 0)));
+      const addition = activePulse(i, spacing, count) ? amount : 0;
+      capped.push(Math.min(1, r * capped[i - 1] + addition));
+      uncapped.push(r * uncapped[i - 1] + addition);
     }
-    return values;
+    return { capped, uncapped };
   }
 
   function firstCappedPulse(values) {
@@ -150,7 +161,7 @@
     let j = 0;
     let accepted = amount;
     for (let i = 1; i <= n; i++) {
-      const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
+      const active = activePulse(i, spacing, count);
       if (active) {
         j = i;
         accepted = Math.min(amount, 1 - r * values[i - 1]);
@@ -183,11 +194,11 @@
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
-    const trainValues = pulseTrainValues();
+    const { capped: trainValues, uncapped: uncappedValues } = pulseTrainValues();
     renderTailInspector(trainValues, n);
     let lastPulse = null;
     for (let i = 1; i <= n; i++) {
-      const active = i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
+      const active = activePulse(i, spacing, count);
       if (active) lastPulse = i;
     }
     const firstCap = firstCappedPulse(trainValues);
@@ -256,6 +267,15 @@
     trainCurve.setAttribute("points", trainValues.map((value, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * value).toFixed(3)}`
     ).join(" "));
+    const comparisonMax = Math.max(1, ...uncappedValues);
+    uncappedPlot.setAttribute("data-max", String(comparisonMax));
+    uncappedCurve.setAttribute("points", uncappedValues.map((value, i) =>
+      `${16 + 2.4 * i},${144 - 128 * value / comparisonMax}`
+    ).join(" "));
+    cappedReference.setAttribute("points", trainValues.map((value, i) =>
+      `${16 + 2.4 * i},${144 - 128 * value / comparisonMax}`
+    ).join(" "));
+    uncappedScale.textContent = `Comparison top: ${(100 * comparisonMax).toFixed(2)}%.`;
     const cursorX = 16 + 2.4 * n;
     updateCursor.setAttribute("x1", String(cursorX));
     updateCursor.setAttribute("x2", String(cursorX));
@@ -401,25 +421,25 @@
     render();
   });
   seekFirstCap.addEventListener("click", () => {
-    const candidate = firstCappedPulse(pulseTrainValues());
+    const candidate = firstCappedPulse(pulseTrainValues().capped);
     if (candidate === -1 || candidate === Number(frame.value)) return;
     pauseForControlChange();
-    const firstCap = firstCappedPulse(pulseTrainValues());
+    const firstCap = firstCappedPulse(pulseTrainValues().capped);
     if (firstCap === -1 || firstCap === Number(frame.value)) return;
     frame.value = String(firstCap);
     render();
   });
   trainTailSeek.addEventListener("click", () => {
-    const { candidate } = currentTail(pulseTrainValues());
+    const { candidate } = currentTail(pulseTrainValues().capped);
     if (candidate === null || candidate === Number(frame.value)) return;
     pauseForControlChange(false);
-    const tail = currentTail(pulseTrainValues());
+    const tail = currentTail(pulseTrainValues().capped);
     if (tail.candidate !== null) frame.value = String(tail.candidate);
     render();
   });
   trainTailFraction.addEventListener("change", () => {
     if (running) stopPlayback("Paused.");
-    else renderTailInspector(pulseTrainValues(), Number(frame.value));
+    else renderTailInspector(pulseTrainValues().capped, Number(frame.value));
   });
   pulseCount.addEventListener("change", () => {
     pauseForControlChange();
@@ -466,6 +486,10 @@
       updateFromElapsed(performance.now());
       if (running) stopPlayback("Paused.");
     }
+  });
+
+  showUncapped.addEventListener("change", () => {
+    uncappedPlot.toggleAttribute("hidden", !showUncapped.checked);
   });
 
   render();

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=6">
-  <script src="/app.js?v=18" defer></script>
+  <link rel="stylesheet" href="/style.css?v=7">
+  <script src="/app.js?v=19" defer></script>
 </head>
 <body>
   <main>
@@ -147,6 +147,19 @@
         <button id="pulse-slot-next" type="button">Next pulse slot</button>
       </div>
       <p id="pulse-slot-help" class="muted">Inspect the scheduled pulse updates without running the clock. These slots remain even when a finite burst stops adding pulses.</p>
+      <details id="train-uncapped-reader">
+        <summary>What if extra light were not clipped?</summary>
+        <label class="uncapped-toggle" for="train-show-uncapped">
+          <input id="train-show-uncapped" type="checkbox">
+          Show the uncapped reference
+        </label>
+        <svg id="train-uncapped-plot" class="chart" viewBox="0 0 320 160" data-max="1" role="img" aria-label="Uncapped pulse train and capped reference on a shared scale" hidden>
+          <polyline id="train-uncapped-curve" stroke="#ffd166" stroke-width="2" fill="none"></polyline>
+          <polyline id="train-capped-reference" stroke="#e9755c" stroke-width="2" fill="none"></polyline>
+        </svg>
+        <p id="train-uncapped-scale" class="muted">Comparison top: 100.00%.</p>
+        <p class="muted">Yellow keeps every addition. Coral stops at one, just like the working lamp. These two lines share a taller scale when the uncapped train goes beyond one; the working chart does not change.</p>
+      </details>
       <p id="train-level" class="readout" aria-live="polite">Frame 0 · pulse-train level 35.00%.</p>
       <p id="pulse-arithmetic">No added pulse has occurred after the initial level.</p>
       <p id="pulse-arithmetic-help" class="muted">This is the most recent added pulse, not the level at every later update. Clipped level is discarded by the toy’s cap.</p>

@@ -159,11 +159,32 @@ input[type="range"] {
   margin-top: 12px;
 }
 
-#pulse-parts summary {
+#pulse-parts summary,
+#train-uncapped-reader summary {
   display: flex;
   min-height: 44px;
   align-items: center;
   cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.uncapped-toggle {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+#train-show-uncapped {
+  min-width: 20px;
+  min-height: 20px;
+  margin: 0;
+  accent-color: #ffd166;
+}
+
+#train-uncapped-plot[hidden] {
+  display: none;
 }
 
 #pulse-parts-chart {
