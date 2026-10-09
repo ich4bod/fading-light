@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=7">
-  <script src="/app.js?v=19" defer></script>
+  <link rel="stylesheet" href="/style.css?v=8">
+  <script src="/app.js?v=20" defer></script>
 </head>
 <body>
   <main>
@@ -109,6 +109,14 @@
           <option value="0.7">70%</option>
         </select>
       </div>
+      <div id="pulse-pattern-control" class="control">
+        <label for="pulse-pattern">Added pulse pattern</label>
+        <select id="pulse-pattern">
+          <option value="equal" selected>Equal additions</option>
+          <option value="half">Half, full, half, full</option>
+        </select>
+        <p id="pulse-pattern-help" class="muted">The first added pulse is half the chosen amount; the next is full. The initial level and the decay fraction do not change.</p>
+      </div>
       <div class="control">
         <label for="pulse-count">Additional pulses after the initial level</label>
         <select id="pulse-count">
@@ -200,6 +208,7 @@
       </div>
       <p id="kept-light-info" class="muted">No light experiment kept.</p>
       <p id="kept-pulse-count-info" class="muted">No pulse count kept.</p>
+      <p id="kept-pulse-pattern-info" class="muted">No pulse pattern kept.</p>
       <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
     </section>
 

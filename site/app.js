@@ -30,6 +30,8 @@
   const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
   const pulseAmount = document.querySelector("#pulse-amount");
+  const pulsePattern = document.querySelector("#pulse-pattern");
+  const keptPulsePatternInfo = document.querySelector("#kept-pulse-pattern-info");
   const pulseCount = document.querySelector("#pulse-count");
   const pulsePartsLast = document.querySelector("#pulse-parts-last");
   const pulsePartsEarlier = document.querySelector("#pulse-parts-earlier");
@@ -75,6 +77,7 @@
       rB: Number(retentionB.value),
       k: Number(pulseSpacing.value),
       a: Number(pulseAmount.value),
+      pattern: pulsePattern.value,
       additionalpulses: pulseCount.value,
       rate: currentRate,
       decayUnit: currentDecayUnit
@@ -83,7 +86,7 @@
 
   function sameExperiment(a, b) {
     return a.n === b.n && a.rA === b.rA && a.rB === b.rB &&
-      a.k === b.k && a.a === b.a && a.rate === b.rate &&
+      a.k === b.k && a.a === b.a && a.pattern === b.pattern && a.rate === b.rate &&
       a.decayUnit === b.decayUnit && a.additionalpulses === b.additionalpulses;
   }
 
@@ -113,6 +116,15 @@
     return i % spacing === 0 && (count === "all" || i / spacing <= Number(count));
   }
 
+  function addedAmount(update, spacing, amount, count, pattern) {
+    if (!activePulse(update, spacing, count)) return 0;
+    if (pattern === "half") {
+      const ordinal = update / spacing;
+      return ordinal % 2 === 1 ? amount / 2 : amount;
+    }
+    return amount;
+  }
+
   function nextEligiblePulse(n) {
     const spacing = Number(pulseSpacing.value);
     const count = pulseCount.value;
@@ -127,10 +139,11 @@
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
+    const pattern = pulsePattern.value;
     const capped = [amount];
     const uncapped = [amount];
     for (let i = 1; i <= 120; i++) {
-      const addition = activePulse(i, spacing, count) ? amount : 0;
+      const addition = addedAmount(i, spacing, amount, count, pattern);
       capped.push(Math.min(1, r * capped[i - 1] + addition));
       uncapped.push(r * uncapped[i - 1] + addition);
     }
@@ -157,14 +170,14 @@
       Number(trainTailFraction.value));
   }
 
-  function pulseParts(values, n, r, spacing, amount, count) {
+  function pulseParts(values, n, r, spacing, amount, count, pattern) {
     let j = 0;
     let accepted = amount;
     for (let i = 1; i <= n; i++) {
-      const active = activePulse(i, spacing, count);
-      if (active) {
+      const addition = addedAmount(i, spacing, amount, count, pattern);
+      if (addition > 0) {
         j = i;
-        accepted = Math.min(amount, 1 - r * values[i - 1]);
+        accepted = Math.min(addition, 1 - r * values[i - 1]);
       }
     }
     const last = accepted * r ** (n - j);
@@ -194,6 +207,7 @@
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
+    const pattern = pulsePattern.value;
     const { capped: trainValues, uncapped: uncappedValues } = pulseTrainValues();
     renderTailInspector(trainValues, n);
     let lastPulse = null;
@@ -204,7 +218,7 @@
     const firstCap = firstCappedPulse(trainValues);
     seekFirstCap.disabled = firstCap === -1 || firstCap === n;
     const train = trainValues[n];
-    const parts = pulseParts(trainValues, n, r, spacing, amount, count);
+    const parts = pulseParts(trainValues, n, r, spacing, amount, count, pattern);
     const lastWidth = 296 * parts.last;
     const earlierWidth = 296 * parts.earlier;
     pulsePartsLast.setAttribute("width", String(lastWidth));
@@ -215,8 +229,9 @@
       pulseArithmetic.textContent = "No added pulse has occurred after the initial level.";
     } else {
       const decayed = r * trainValues[lastPulse - 1];
-      const clipped = Math.max(0, decayed + amount - 1);
-      pulseArithmetic.textContent = `Pulse at update ${lastPulse}: after decay ${(100 * decayed).toFixed(2)}% + pulse ${(100 * amount).toFixed(2)}% − clipped ${(100 * clipped).toFixed(2)}% = ${(100 * trainValues[lastPulse]).toFixed(2)}%.`;
+      const addition = addedAmount(lastPulse, spacing, amount, count, pattern);
+      const clipped = Math.max(0, decayed + addition - 1);
+      pulseArithmetic.textContent = `Pulse at update ${lastPulse}: after decay ${(100 * decayed).toFixed(2)}% + pulse ${(100 * addition).toFixed(2)}% − clipped ${(100 * clipped).toFixed(2)}% = ${(100 * trainValues[lastPulse]).toFixed(2)}%.`;
     }
 
     retentionLabel.textContent = currentDecayUnit === "second"
@@ -258,6 +273,11 @@
       : keptLight.additionalpulses === "all"
         ? "Kept additional pulses: keep adding."
         : `Kept additional pulses: ${keptLight.additionalpulses}.`;
+    keptPulsePatternInfo.textContent = keptLight === null
+      ? "No pulse pattern kept."
+      : keptLight.pattern === "half"
+        ? "Kept pulse pattern: half, full, half, full."
+        : "Kept pulse pattern: equal additions.";
     curve.setAttribute("points", Array.from({ length: 121 }, (_, i) =>
       `${(16 + 2.4 * i).toFixed(3)},${(144 - 128 * r ** i).toFixed(3)}`
     ).join(" "));
@@ -346,6 +366,7 @@
     retentionB.value = String(keptLight.rB);
     pulseSpacing.value = String(keptLight.k);
     pulseAmount.value = String(keptLight.a);
+    pulsePattern.value = keptLight.pattern;
     pulseCount.value = keptLight.additionalpulses;
     updateRate.value = String(keptLight.rate);
     currentRate = keptLight.rate;
@@ -417,6 +438,10 @@
     render();
   });
   pulseAmount.addEventListener("change", () => {
+    pauseForControlChange();
+    render();
+  });
+  pulsePattern.addEventListener("change", () => {
     pauseForControlChange();
     render();
   });

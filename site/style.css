@@ -159,6 +159,10 @@ input[type="range"] {
   margin-top: 12px;
 }
 
+#pulse-pattern-control {
+  gap: 8px;
+}
+
 #pulse-parts summary,
 #train-uncapped-reader summary {
   display: flex;
