@@ -54,6 +54,7 @@
   const updateCursor = document.querySelector("#update-cursor");
   const flashCursor = document.querySelector("#flash-cursor");
   const secondCursor = document.querySelector("#second-cursor");
+  const trainCursor = document.querySelector("#train-cursor");
   const keepLight = document.querySelector("#keep-light");
   const returnLight = document.querySelector("#return-light");
   const forgetLight = document.querySelector("#forget-light");
@@ -316,6 +317,8 @@
     flashCursor.setAttribute("cy", String(144 - 128 * level));
     secondCursor.setAttribute("cx", String(cursorX));
     secondCursor.setAttribute("cy", String(144 - 128 * levelB));
+    trainCursor.setAttribute("cx", String(cursorX));
+    trainCursor.setAttribute("cy", String(144 - 128 * train));
   }
 
   function stopPlayback(status, refresh = true) {
