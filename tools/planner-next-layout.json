@@ -1,0 +1,150 @@
+{
+  "slug": "fading-light",
+  "controls": [
+    [
+      "retention",
+      "select"
+    ],
+    [
+      "frame",
+      "input"
+    ],
+    [
+      "threshold",
+      "select"
+    ],
+    [
+      "update-rate",
+      "select"
+    ],
+    [
+      "decay-unit",
+      "select"
+    ],
+    [
+      "seek-threshold",
+      "button"
+    ],
+    [
+      "rewind",
+      "button"
+    ],
+    [
+      "advance",
+      "button"
+    ],
+    [
+      "run",
+      "button"
+    ],
+    [
+      "pause",
+      "button"
+    ],
+    [
+      "run-next-pulse",
+      "button"
+    ],
+    [
+      "retention-b",
+      "select"
+    ],
+    [
+      "seek-flash-gap",
+      "button"
+    ],
+    [
+      "pulse-amount",
+      "select"
+    ],
+    [
+      "pulse-pattern",
+      "select"
+    ],
+    [
+      "pulse-count",
+      "select"
+    ],
+    [
+      "train-tail-fraction",
+      "select"
+    ],
+    [
+      "train-tail-seek",
+      "button"
+    ],
+    [
+      "seek-first-cap",
+      "button"
+    ],
+    [
+      "pulse-spacing",
+      "select"
+    ],
+    [
+      "pulse-slot-previous",
+      "button"
+    ],
+    [
+      "pulse-slot-next",
+      "button"
+    ],
+    [
+      "train-show-uncapped",
+      "input"
+    ],
+    [
+      "keep-light",
+      "button"
+    ],
+    [
+      "return-light",
+      "button"
+    ],
+    [
+      "forget-light",
+      "button"
+    ],
+    [
+      "light-show-kept-curve",
+      "input"
+    ]
+  ],
+  "cases": [
+    {
+      "slug": "fading-light",
+      "lane": 14,
+      "name": "Fading Light",
+      "mode": "chartfirst",
+      "title": "Fading Light \u2014 Bring the shared chart up beside the first working lamp",
+      "depends": "685",
+      "message": "the shared flash chart precedes secondary recipes without changing an update",
+      "groups": [],
+      "orders": [
+        [
+          "#first-flash-lamp",
+          ".chart-section"
+        ],
+        [
+          ".chart-section",
+          ".second-flash"
+        ],
+        [
+          ".chart-section",
+          ".small-pulses"
+        ]
+      ],
+      "copySelectors": [
+        "#curve-cursor-help"
+      ],
+      "steps": "Move the intact section.chart-section, with its SVG, all dots/curves and helper paragraphs, immediately after #first-flash-lamp. Leave threshold/time/readout paragraphs in their existing relative order after the chart. Preserve any already-shipped #chart-seconds from686. Keep both secondary flash and pulse sections after this chart. Do not clone the chart or move any lamp, input, clock handler or memory control.",
+      "palette": "midnight #101820, cream #fff3dc, grey #b8bcc6, gold #ffd166, coral #e9755c; existing Georgia22/system16",
+      "copy": [
+        [
+          "#curve-cursor-help",
+          "The dotted line is this update. Gold is the first flash, coral the second, and grey the pulse train; each dot matches its lamp."
+        ]
+      ]
+    }
+  ]
+}
