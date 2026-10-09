@@ -1,0 +1,267 @@
+{
+  "slug": "fading-light",
+  "controls": [
+    [
+      "retention",
+      "select"
+    ],
+    [
+      "frame",
+      "input"
+    ],
+    [
+      "threshold",
+      "select"
+    ],
+    [
+      "update-rate",
+      "select"
+    ],
+    [
+      "decay-unit",
+      "select"
+    ],
+    [
+      "seek-threshold",
+      "button"
+    ],
+    [
+      "rewind",
+      "button"
+    ],
+    [
+      "advance",
+      "button"
+    ],
+    [
+      "run",
+      "button"
+    ],
+    [
+      "pause",
+      "button"
+    ],
+    [
+      "run-next-pulse",
+      "button"
+    ],
+    [
+      "retention-b",
+      "select"
+    ],
+    [
+      "seek-flash-gap",
+      "button"
+    ],
+    [
+      "pulse-amount",
+      "select"
+    ],
+    [
+      "pulse-pattern",
+      "select"
+    ],
+    [
+      "pulse-count",
+      "select"
+    ],
+    [
+      "train-tail-fraction",
+      "select"
+    ],
+    [
+      "train-tail-seek",
+      "button"
+    ],
+    [
+      "seek-first-cap",
+      "button"
+    ],
+    [
+      "pulse-spacing",
+      "select"
+    ],
+    [
+      "pulse-slot-previous",
+      "button"
+    ],
+    [
+      "pulse-slot-next",
+      "button"
+    ],
+    [
+      "train-show-uncapped",
+      "input"
+    ],
+    [
+      "keep-light",
+      "button"
+    ],
+    [
+      "return-light",
+      "button"
+    ],
+    [
+      "forget-light",
+      "button"
+    ]
+  ],
+  "copy": [
+    {
+      "selector": "#decay-unit-help",
+      "text": "Matching seconds changes the fraction used at each update. Only decay is matched; pulse spacing is still in updates."
+    },
+    {
+      "selector": "#run-next-pulse-help",
+      "text": "Run until the next pulse has been added, then pause on its result. The initial level does not count as the next pulse."
+    },
+    {
+      "selector": "#threshold-help",
+      "text": "A crossing between updates is rounded up. A level beyond this strip cannot be reached here."
+    },
+    {
+      "selector": "#flash-gap-help",
+      "text": "This compares the two flashes across updates 0–120. It pauses at the earliest largest difference; it does not compare the pulse train."
+    },
+    {
+      "selector": "#pulse-pattern-help",
+      "text": "The first added pulse is half the chosen amount; the next is full. The initial level and the decay fraction do not change."
+    },
+    {
+      "selector": "#pulse-count-help",
+      "text": "The initial level is always present. After the chosen additional pulses, only decay remains."
+    },
+    {
+      "selector": "#train-tail-help",
+      "text": "Look only after the final addition. The chosen fraction is relative to that peak, not to a full lamp."
+    },
+    {
+      "selector": "#seek-first-cap-help",
+      "text": "Seek the first update at one in this 120-update experiment. If no pulse reaches the cap, this action is unavailable."
+    },
+    {
+      "selector": "#pulse-slot-help",
+      "text": "Inspect the scheduled pulse updates without running the clock. These slots remain even when a finite burst stops adding pulses."
+    },
+    {
+      "selector": "#pulse-arithmetic-help",
+      "text": "This is the most recent added pulse, not the level at every later update. Clipped level is discarded by the toy’s cap."
+    },
+    {
+      "selector": "#pulse-parts-help",
+      "text": "Gold is the accepted part of the last pulse, after its later decay. Coral is earlier light. Both share the same zero-to-one scale; clipped input was never stored."
+    },
+    {
+      "selector": "#curve-cursor-help",
+      "text": "The dotted line is this update. The two dots are the levels in the lamps above."
+    },
+    {
+      "selector": "#light-memory-help",
+      "text": "Return restores the experiment and its update. It does not start the clock."
+    }
+  ],
+  "cases": [
+    {
+      "slug": "fading-light",
+      "lane": 14,
+      "mode": "trainsettings",
+      "title": "Fading Light — Fold the pulse recipe without hiding its working lamp",
+      "depends": "700",
+      "goal": "The chosen train remains readable while its recipe is optional. Train configuration, questions about that train, and the working lamp become distinct things.",
+      "steps": "In .small-pulses create closed details #pulse-recipe immediately after its h2. Move only recipe controls into it, with their labels/wrappers and original help: pulse-amount, pulse-pattern-control, pulse-count and pulse-count-help, pulse-spacing. If a former pulse-count wrapper contains other controls, split that wrapper rather than moving unrelated children. Keep #pulse-inspection from700, scheduled slot buttons/help, train-uncapped-reader, train-level, arithmetic/help, lamp, pulse-amount-rule and pulse-parts OUTSIDE the recipe and otherwise in their existing order. Preserve actual input IDs/types/options and all runtime render/keep/Return readers. Only HTML/CSS structural changes, no JS setting handlers.",
+      "groups": [
+        {
+          "id": "pulse-recipe",
+          "summary": "Choose the pulse recipe",
+          "members": [
+            "#pulse-amount",
+            "#pulse-pattern-control",
+            "#pulse-count",
+            "#pulse-count-help",
+            "#pulse-spacing"
+          ]
+        }
+      ],
+      "outside": [
+        "#pulse-inspection",
+        "#train-level",
+        "#train-glow",
+        "#pulse-slot-next",
+        "#pulse-parts",
+        "#train-uncapped-reader"
+      ],
+      "message": "pulse recipe settings fold without hiding the working lamp or its independent questions"
+    },
+    {
+      "slug": "fading-light",
+      "lane": 14,
+      "mode": "memory",
+      "title": "Fading Light — Keep the saved experiment optional and below the working chart",
+      "depends": "668",
+      "goal": "The current three curves answer the current experiment before its saved comparison. Keep/Return and the saved-curve choice share one optional door.",
+      "steps": "Wrap intact #light-memory section in closed details #light-memory-drawer at its existing position below .chart-section. Keep the section id and all saved count/pattern/readers and668 kept-curve choice/help inside it. Keep #kept-flash-curve in its original working-chart SVG; do not move or clone a plot. Opening/closing never checks the overlay, forgets memory or returns an experiment. No runtime JS change, only HTML/CSS structure.",
+      "groups": [
+        {
+          "id": "light-memory-drawer",
+          "summary": "Keep one experiment for comparison",
+          "members": [
+            "#light-memory",
+            "#keep-light",
+            "#return-light",
+            "#forget-light",
+            "#kept-light-info",
+            "#light-show-kept-curve"
+          ]
+        }
+      ],
+      "outside": [
+        "#train-level",
+        "#flash-curve",
+        "#kept-flash-curve"
+      ],
+      "orders": [
+        [
+          ".chart-section",
+          "#light-memory-drawer"
+        ]
+      ],
+      "message": "the current light chart leads an optional saved-experiment drawer without changing its overlay"
+    },
+    {
+      "slug": "fading-light",
+      "lane": 14,
+      "mode": "clocknotes",
+      "title": "Fading Light — Put optional crossing and clock arithmetic in one readable drawer",
+      "depends": "nothing",
+      "goal": "The first lamp is an immediate result, not the end of a stack of explanations. The arithmetic is still available beside it and says the same thing.",
+      "steps": "Add closed details #flash-clock-notes after #first-flash-lamp. Move threshold-info, threshold-help, time-unit, half-level, half-time, rate-help and decay-unit-help into it in that order. Keep all control labels/selects and #seek-threshold outside, as well as flash-level, lamp, play-status, all transport controls and the final note distinguishing updates from seconds. Preserve every paragraph text and its ID; dynamic readers continue updating while folded. Do not move the un-id'd playback paragraph or alter elapsed-time playback. Only HTML/CSS changes.",
+      "groups": [
+        {
+          "id": "flash-clock-notes",
+          "summary": "Read the crossing and the clock",
+          "members": [
+            "#threshold-info",
+            "#threshold-help",
+            "#time-unit",
+            "#half-level",
+            "#half-time",
+            "#rate-help",
+            "#decay-unit-help"
+          ]
+        }
+      ],
+      "outside": [
+        "#retention",
+        "#frame",
+        "#threshold",
+        "#seek-threshold",
+        "#update-rate",
+        "#decay-unit",
+        "#flash-level",
+        "#first-flash-lamp",
+        "#play-status"
+      ],
+      "message": "optional crossing and clock arithmetic folds while the flash controls and result remain visible"
+    }
+  ]
+}
