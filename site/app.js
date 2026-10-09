@@ -62,6 +62,7 @@
   const keptPulseCountInfo = document.querySelector("#kept-pulse-count-info");
   const showKeptCurve = document.querySelector("#light-show-kept-curve");
   const keptCurve = document.querySelector("#kept-flash-curve");
+  const chartSeconds = document.querySelectorAll("#chart-seconds text");
 
   let keptLight = null;
   let running = false;
@@ -253,6 +254,9 @@
     seekThreshold.disabled = firstUpdate > 120 || running;
     timeUnit.textContent = `At ${currentRate} updates per second, frame ${n} corresponds to ${(n / currentRate).toFixed(2)} seconds.`;
     halfTime.textContent = `At this rate, half the starting level takes ${(Math.log(0.5) / Math.log(r) / currentRate).toFixed(2)} seconds.`;
+    chartSeconds.forEach((label, i) => {
+      label.textContent = `${(i * 60 / currentRate).toFixed(2)} s`;
+    });
     run.textContent = `Run at ${currentRate} updates per second`;
     glow.style.opacity = String(level);
     glowB.style.opacity = String(levelB);

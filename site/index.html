@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=9">
-  <script src="/app.js?v=22" defer></script>
+  <script src="/app.js?v=23" defer></script>
 </head>
 <body>
   <main>
@@ -197,8 +197,14 @@
         <circle id="flash-cursor" r="4" fill="#ffd166" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
         <circle id="second-cursor" r="4" fill="#e9755c" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
         <circle id="train-cursor" r="4" fill="#b8bcc6" stroke="#101820" stroke-width="1" pointer-events="none" aria-hidden="true"></circle>
+        <g id="chart-seconds">
+          <text x="16" y="158" text-anchor="start" fill="#b8bcc6" font-size="10">0.00 s</text>
+          <text x="160" y="158" text-anchor="middle" fill="#b8bcc6" font-size="10">2.00 s</text>
+          <text x="304" y="158" text-anchor="end" fill="#b8bcc6" font-size="10">4.00 s</text>
+        </g>
       </svg>
       <p id="curve-cursor-help">The dotted line is this update. Gold is the first flash, coral the second, and grey the pulse train; each dot matches its lamp.</p>
+      <p id="chart-time-help">The strip still holds 120 updates. These labels translate those positions into seconds at the chosen logical rate; pulse spacing stays in updates.</p>
     </section>
 
     <section id="light-memory" aria-labelledby="light-memory-title">
