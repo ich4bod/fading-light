@@ -1,0 +1,73 @@
+{
+  "slug": "fading-light",
+  "cases": {
+    "studies": {
+      "kind": "values",
+      "message": "three light studies restore logical settings silently without replacing the kept experiment",
+      "door": "light-studies",
+      "summary": "Try three light experiments",
+      "select": "light-study",
+      "apply": "light-study-apply",
+      "keep": "keep-light",
+      "return": "return-light",
+      "fields": [
+        "retention",
+        "retention-b",
+        "pulse-spacing",
+        "pulse-amount",
+        "pulse-pattern",
+        "pulse-count",
+        "update-rate",
+        "decay-unit",
+        "frame"
+      ],
+      "rows": [
+        [
+          "tail",
+          "One pulse and its tail",
+          [
+            "0.995",
+            "0.9",
+            "12",
+            "0.7",
+            "equal",
+            "1",
+            "30",
+            "update",
+            "24"
+          ]
+        ],
+        [
+          "steps",
+          "A train before the cap",
+          [
+            "0.9",
+            "0.995",
+            "12",
+            "0.35",
+            "equal",
+            "all",
+            "30",
+            "update",
+            "24"
+          ]
+        ],
+        [
+          "seconds",
+          "Same decay at sixty",
+          [
+            "0.9",
+            "0.995",
+            "12",
+            "0.35",
+            "equal",
+            "all",
+            "60",
+            "second",
+            "24"
+          ]
+        ]
+      ]
+    }
+  }
+}
