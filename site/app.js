@@ -1,6 +1,7 @@
 (() => {
   const retention = document.querySelector("#retention");
   const retentionB = document.querySelector("#retention-b");
+  const swapFlashRetentions = document.querySelector("#swap-flash-retentions");
   const frame = document.querySelector("#frame");
   const rewind = document.querySelector("#rewind");
   const advance = document.querySelector("#advance");
@@ -279,6 +280,7 @@
     keepLight.disabled = running;
     returnLight.disabled = running || keptLight === null ||
       sameExperiment(currentExperiment(), keptLight);
+    swapFlashRetentions.disabled = retention.value === retentionB.value;
     forgetLight.disabled = keptLight === null;
     showKeptCurve.disabled = keptLight === null;
     keptCurve.toggleAttribute("hidden", keptLight === null || !showKeptCurve.checked);
@@ -383,6 +385,14 @@
   keepLight.addEventListener("click", () => {
     if (running) return;
     keptLight = currentExperiment();
+    render();
+  });
+  swapFlashRetentions.addEventListener("click", () => {
+    if (retention.value === retentionB.value) return;
+    pauseForControlChange(false);
+    const first = retention.value;
+    retention.value = retentionB.value;
+    retentionB.value = first;
     render();
   });
   returnLight.addEventListener("click", () => {

@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=12">
-  <script src="/app.js?v=24" defer></script>
+  <script src="/app.js?v=25" defer></script>
 </head>
 <body>
   <main>
@@ -87,6 +87,10 @@
           <option value="0.995">99.5%</option>
         </select>
       </div>
+      <div class="actions">
+        <button id="swap-flash-retentions" type="button">Exchange the two fractions</button>
+      </div>
+      <p id="swap-flash-help" class="muted">Exchange which flash keeps each fraction. The update stays put; the pulse train follows the first fraction.</p>
       <p id="second-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
       <details id="flash-gap-question">
         <summary>Where are the flashes farthest apart?</summary>
