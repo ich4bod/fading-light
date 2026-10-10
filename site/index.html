@@ -88,11 +88,14 @@
         </select>
       </div>
       <p id="second-level" class="readout" aria-live="polite">Frame 0 · retained 100.00%.</p>
-      <div class="actions">
-        <button id="seek-flash-gap" type="button">Inspect greatest flash gap</button>
-      </div>
-      <p id="flash-gap-info" class="muted">Largest flash gap in this strip: 54.61 percentage points at update 19.</p>
-      <p id="flash-gap-help" class="muted">This compares the two flashes across updates 0–120. It pauses at the earliest largest difference; it does not compare the pulse train.</p>
+      <details id="flash-gap-question">
+        <summary>Where are the flashes farthest apart?</summary>
+        <div class="actions">
+          <button id="seek-flash-gap" type="button">Inspect greatest flash gap</button>
+        </div>
+        <p id="flash-gap-info" class="muted">Largest flash gap in this strip: 54.61 percentage points at update 19.</p>
+        <p id="flash-gap-help" class="muted">This compares the two flashes across updates 0–120. It pauses at the earliest largest difference; it does not compare the pulse train.</p>
+      </details>
       <div class="lamp" role="img" aria-label="Second mathematical flash level">
         <div id="second-glow" class="glow"></div>
       </div>
