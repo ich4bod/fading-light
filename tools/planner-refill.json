@@ -1,0 +1,66 @@
+{
+  "mode": "bursts",
+  "lane": 14,
+  "depends": "752",
+  "title": "Fading Light \u2014 Compare a finite pulse burst with the same continuing train",
+  "message": "three finite-train studies distinguish an ending from a recurring source at the same decay",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ],
+  "rows": [
+    [
+      "burst-two",
+      "Two later pulses, then dark",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.35",
+        "equal",
+        "2",
+        "30",
+        "update",
+        "48"
+      ]
+    ],
+    [
+      "burst-four",
+      "Four later pulses, then dark",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.35",
+        "equal",
+        "4",
+        "30",
+        "update",
+        "72"
+      ]
+    ],
+    [
+      "burst-continues",
+      "The same train keeps arriving",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.35",
+        "equal",
+        "all",
+        "30",
+        "update",
+        "72"
+      ]
+    ]
+  ],
+  "help": "These trains start with the same light, spacing and decay. A finite count ends the later additions, not the existing tail. Loading a study stays paused and keeps your saved experiment."
+}
