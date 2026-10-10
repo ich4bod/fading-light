@@ -180,7 +180,8 @@ input[type="range"] {
 }
 
 #pulse-parts summary,
-#train-uncapped-reader summary {
+#train-uncapped-reader summary,
+#pulse-inspection > summary {
   display: flex;
   min-height: 44px;
   align-items: center;
