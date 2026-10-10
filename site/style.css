@@ -144,6 +144,34 @@ input[type="range"] {
   margin-top: 20px;
 }
 
+#light-memory-drawer {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+  border: 1px solid #b8bcc6;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff3dc;
+  background: #18232c;
+}
+
+#light-memory-drawer > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font: 16px system-ui, sans-serif;
+}
+
+#light-memory-drawer #light-memory {
+  margin-top: 0;
+}
+
+#light-memory-drawer #light-memory > h2 {
+  margin-top: 0;
+}
+
 #light-memory .kept-curve-toggle {
   display: flex;
   min-height: 44px;

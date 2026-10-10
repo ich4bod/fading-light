@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=13">
+  <link rel="stylesheet" href="/style.css?v=14">
   <script src="/app.js?v=25" defer></script>
 </head>
 <body>
@@ -224,7 +224,9 @@
       <p id="chart-time-help">The strip still holds 120 updates. These labels translate those positions into seconds at the chosen logical rate; pulse spacing stays in updates.</p>
     </section>
 
-    <section id="light-memory" aria-labelledby="light-memory-title">
+    <details id="light-memory-drawer">
+      <summary>Keep one experiment for comparison</summary>
+      <section id="light-memory" aria-labelledby="light-memory-title">
       <h2 id="light-memory-title">Keep one experiment</h2>
       <div class="actions">
         <button id="keep-light" type="button">Keep this experiment</button>
@@ -240,7 +242,8 @@
       </label>
       <p id="kept-flash-curve-help" class="muted">Dashed cream is the first flash you kept, using its own saved decay rule and update rate. The working flashes and lamps stay as they are.</p>
       <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
-    </section>
+      </section>
+    </details>
 
     <p class="note">Updates are not seconds. This is a mathematical light, not a model of a display or a sound.</p>
   </main>
