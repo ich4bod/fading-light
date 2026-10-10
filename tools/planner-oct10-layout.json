@@ -153,7 +153,7 @@
     },
     {
       "selector": "#curve-cursor-help",
-      "text": "The dotted line is this update. The two dots are the levels in the lamps above."
+      "text": "The dotted line is this update. Gold is the first flash, coral the second, and grey the pulse train; each dot matches its lamp."
     },
     {
       "selector": "#light-memory-help",
