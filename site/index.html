@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=9">
-  <script src="/app.js?v=23" defer></script>
+  <link rel="stylesheet" href="/style.css?v=10">
+  <script src="/app.js?v=24" defer></script>
 </head>
 <body>
   <main>
@@ -137,6 +137,10 @@
         </div>
         <p id="train-tail-info" class="muted">A continuing train has no final pulse.</p>
         <p id="train-tail-help" class="muted">Look only after the final addition. The chosen fraction is relative to that peak, not to a full lamp.</p>
+        <div class="actions">
+          <button id="pulse-last-added" type="button">Inspect the final pulse</button>
+        </div>
+        <p id="pulse-last-added-help" class="muted">Go to the final actual addition, including the initial level when there are no extra pulses. A continuing train has no final pulse.</p>
         <div class="actions">
           <button id="seek-first-cap" type="button">Inspect the first capped pulse</button>
         </div>

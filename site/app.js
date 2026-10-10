@@ -39,6 +39,7 @@
   const seekFirstCap = document.querySelector("#seek-first-cap");
   const trainTailFraction = document.querySelector("#train-tail-fraction");
   const trainTailSeek = document.querySelector("#train-tail-seek");
+  const pulseLastAdded = document.querySelector("#pulse-last-added");
   const trainTailInfo = document.querySelector("#train-tail-info");
   const trainLevel = document.querySelector("#train-level");
   const pulseArithmetic = document.querySelector("#pulse-arithmetic");
@@ -174,6 +175,12 @@
       Number(trainTailFraction.value));
   }
 
+  function finalAddedCandidate() {
+    if (pulseCount.value === "all") return null;
+    const finalUpdate = Number(pulseCount.value) * Number(pulseSpacing.value);
+    return finalUpdate <= 120 && finalUpdate !== Number(frame.value) ? finalUpdate : null;
+  }
+
   function pulseParts(values, n, r, spacing, amount, count, pattern) {
     let j = 0;
     let accepted = amount;
@@ -214,6 +221,7 @@
     const pattern = pulsePattern.value;
     const { capped: trainValues, uncapped: uncappedValues } = pulseTrainValues();
     renderTailInspector(trainValues, n);
+    pulseLastAdded.disabled = finalAddedCandidate() === null;
     let lastPulse = null;
     for (let i = 1; i <= n; i++) {
       const active = activePulse(i, spacing, count);
@@ -480,6 +488,13 @@
     pauseForControlChange(false);
     const tail = currentTail(pulseTrainValues().capped);
     if (tail.candidate !== null) frame.value = String(tail.candidate);
+    render();
+  });
+  pulseLastAdded.addEventListener("click", () => {
+    const candidate = finalAddedCandidate();
+    if (candidate === null) return;
+    pauseForControlChange(false);
+    frame.value = String(candidate);
     render();
   });
   trainTailFraction.addEventListener("change", () => {
