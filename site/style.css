@@ -179,6 +179,25 @@ input[type="range"] {
   gap: 8px;
 }
 
+#pulse-recipe {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #b8bcc6;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff3dc;
+  background: #18232c;
+}
+
+#pulse-recipe > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font: 16px system-ui, sans-serif;
+}
+
 #pulse-parts summary,
 #train-uncapped-reader summary,
 #pulse-inspection > summary,

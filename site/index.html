@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=12">
+  <link rel="stylesheet" href="/style.css?v=13">
   <script src="/app.js?v=25" defer></script>
 </head>
 <body>
@@ -108,62 +108,65 @@
 
     <section class="small-pulses" aria-labelledby="pulse-title">
       <h2 id="pulse-title">Small pulses</h2>
-      <div class="control">
-        <label for="pulse-amount">Level added by each pulse</label>
-        <select id="pulse-amount">
-          <option value="0.1">10%</option>
-          <option value="0.35" selected>35%</option>
-          <option value="0.7">70%</option>
-        </select>
-      </div>
-      <div id="pulse-pattern-control" class="control">
-        <label for="pulse-pattern">Added pulse pattern</label>
-        <select id="pulse-pattern">
-          <option value="equal" selected>Equal additions</option>
-          <option value="half">Half, full, half, full</option>
-        </select>
-        <p id="pulse-pattern-help" class="muted">The first added pulse is half the chosen amount; the next is full. The initial level and the decay fraction do not change.</p>
-      </div>
-      <div class="control">
-        <label for="pulse-count">Additional pulses after the initial level</label>
-        <select id="pulse-count">
-          <option value="0">None</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="4">Four</option>
-          <option value="all" selected>Keep adding</option>
-        </select>
-        <p id="pulse-count-help" class="muted">The initial level is always present. After the chosen additional pulses, only decay remains.</p>
-        <details id="pulse-inspection">
-          <summary>Inspect the pulse train</summary>
-          <label for="train-tail-fraction">Quiet fraction of the final peak</label>
-          <select id="train-tail-fraction">
-            <option value="0.5" selected>Half</option>
-            <option value="0.1">A tenth</option>
+      <details id="pulse-recipe">
+        <summary>Choose the pulse recipe</summary>
+        <div class="control">
+          <label for="pulse-amount">Level added by each pulse</label>
+          <select id="pulse-amount">
+            <option value="0.1">10%</option>
+            <option value="0.35" selected>35%</option>
+            <option value="0.7">70%</option>
           </select>
-          <div class="actions">
-            <button id="train-tail-seek" type="button">Inspect the first quiet update</button>
-          </div>
-          <p id="train-tail-info" class="muted">A continuing train has no final pulse.</p>
-          <p id="train-tail-help" class="muted">Look only after the final addition. The chosen fraction is relative to that peak, not to a full lamp.</p>
-          <div class="actions">
-            <button id="pulse-last-added" type="button">Inspect the final pulse</button>
-          </div>
-          <p id="pulse-last-added-help" class="muted">Go to the final actual addition, including the initial level when there are no extra pulses. A continuing train has no final pulse.</p>
-          <div class="actions">
-            <button id="seek-first-cap" type="button">Inspect the first capped pulse</button>
-          </div>
-          <p id="seek-first-cap-help" class="muted">Seek the first update at one in this 120-update experiment. If no pulse reaches the cap, this action is unavailable.</p>
-        </details>
-      </div>
-      <div class="control">
-        <label for="pulse-spacing">Updates between pulses</label>
-        <select id="pulse-spacing">
-          <option value="12">12 updates</option>
-          <option value="24" selected>24 updates</option>
-          <option value="48">48 updates</option>
+        </div>
+        <div id="pulse-pattern-control" class="control">
+          <label for="pulse-pattern">Added pulse pattern</label>
+          <select id="pulse-pattern">
+            <option value="equal" selected>Equal additions</option>
+            <option value="half">Half, full, half, full</option>
+          </select>
+          <p id="pulse-pattern-help" class="muted">The first added pulse is half the chosen amount; the next is full. The initial level and the decay fraction do not change.</p>
+        </div>
+        <div class="control">
+          <label for="pulse-count">Additional pulses after the initial level</label>
+          <select id="pulse-count">
+            <option value="0">None</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="4">Four</option>
+            <option value="all" selected>Keep adding</option>
+          </select>
+          <p id="pulse-count-help" class="muted">The initial level is always present. After the chosen additional pulses, only decay remains.</p>
+        </div>
+        <div class="control">
+          <label for="pulse-spacing">Updates between pulses</label>
+          <select id="pulse-spacing">
+            <option value="12">12 updates</option>
+            <option value="24" selected>24 updates</option>
+            <option value="48">48 updates</option>
+          </select>
+        </div>
+      </details>
+      <details id="pulse-inspection">
+        <summary>Inspect the pulse train</summary>
+        <label for="train-tail-fraction">Quiet fraction of the final peak</label>
+        <select id="train-tail-fraction">
+          <option value="0.5" selected>Half</option>
+          <option value="0.1">A tenth</option>
         </select>
-      </div>
+        <div class="actions">
+          <button id="train-tail-seek" type="button">Inspect the first quiet update</button>
+        </div>
+        <p id="train-tail-info" class="muted">A continuing train has no final pulse.</p>
+        <p id="train-tail-help" class="muted">Look only after the final addition. The chosen fraction is relative to that peak, not to a full lamp.</p>
+        <div class="actions">
+          <button id="pulse-last-added" type="button">Inspect the final pulse</button>
+        </div>
+        <p id="pulse-last-added-help" class="muted">Go to the final actual addition, including the initial level when there are no extra pulses. A continuing train has no final pulse.</p>
+        <div class="actions">
+          <button id="seek-first-cap" type="button">Inspect the first capped pulse</button>
+        </div>
+        <p id="seek-first-cap-help" class="muted">Seek the first update at one in this 120-update experiment. If no pulse reaches the cap, this action is unavailable.</p>
+      </details>
       <div class="actions">
         <button id="pulse-slot-previous" type="button">Previous pulse slot</button>
         <button id="pulse-slot-next" type="button">Next pulse slot</button>
