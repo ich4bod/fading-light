@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=19">
-  <script src="/app.js?v=28" defer></script>
+  <link rel="stylesheet" href="/style.css?v=20">
+  <script src="/app.js?v=29" defer></script>
 </head>
 <body>
   <main>
@@ -106,6 +106,12 @@
       <summary>Add the sampled flash levels</summary>
       <p id="flash-sample-total-readout" class="readout">Updates 0–0: 1.000 level-samples. Current flash: 100.00%.</p>
       <p id="flash-sample-total-help" class="muted">This adds one retained level at each logical update, including the full flash at update zero. It is a discrete sample total, not another lamp and not a measured exposure. Changing the update rate can change the sample total without changing a per-second decay rule.</p>
+    </details>
+
+    <details id="flash-next-update">
+      <summary>What the next update removes</summary>
+      <p id="flash-next-update-readout" class="readout">Next update 1: 98.00% remains · 2.00 percentage points removed.</p>
+      <p id="flash-next-update-help" class="muted">The next update keeps a fraction of the light left now. The removed percentage points get smaller as the flash fades. This forecasts the first flash only; it does not advance the clock.</p>
     </details>
 
     <section class="second-flash" aria-labelledby="second-title">

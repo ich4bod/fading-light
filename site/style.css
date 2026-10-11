@@ -192,6 +192,34 @@ input[type="range"] {
   margin-top: 0;
 }
 
+#flash-next-update {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+  border: 1px solid #b8bcc6;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff3dc;
+  background: #18232c;
+}
+
+#flash-next-update > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font: 16px system-ui, sans-serif;
+}
+
+#flash-next-update > .readout {
+  margin-top: 0;
+}
+
+#flash-next-update > p {
+  overflow-wrap: anywhere;
+}
+
 #light-studies {
   display: grid;
   gap: 8px;

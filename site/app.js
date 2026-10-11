@@ -26,6 +26,7 @@
   const glowB = document.querySelector("#second-glow");
   const secondLevel = document.querySelector("#second-level");
   const flashSampleTotalReadout = document.querySelector("#flash-sample-total-readout");
+  const flashNextUpdateReadout = document.querySelector("#flash-next-update-readout");
   const seekFlashGap = document.querySelector("#seek-flash-gap");
   const flashGapInfo = document.querySelector("#flash-gap-info");
   const pulseSpacing = document.querySelector("#pulse-spacing");
@@ -224,6 +225,9 @@
     let sampledTotal = 0;
     for (let i = 0; i <= n; i++) sampledTotal += r ** i;
     flashSampleTotalReadout.textContent = `Updates 0–${n}: ${sampledTotal.toFixed(3)} level-samples. Current flash: ${(100 * level).toFixed(2)}%.`;
+    const nextLevel = r ** (n + 1);
+    const removedLevel = level * (1 - r);
+    flashNextUpdateReadout.textContent = `Next update ${n + 1}: ${(100 * nextLevel).toFixed(2)}% remains · ${(100 * removedLevel).toFixed(2)} percentage points removed.`;
     const target = Number(threshold.value);
     const firstUpdate = Math.ceil(Math.log(target) / Math.log(r));
     const rB = effectiveRetention(Number(retentionB.value));
