@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=18">
-  <script src="/app.js?v=27" defer></script>
+  <link rel="stylesheet" href="/style.css?v=19">
+  <script src="/app.js?v=28" defer></script>
 </head>
 <body>
   <main>
@@ -101,6 +101,12 @@
 
     <p id="play-status" class="muted" aria-live="polite">Paused.</p>
     <p>Playback uses elapsed time, not the number of screen redraws. Pause or move the update slider to inspect a pulse.</p>
+
+    <details id="flash-sample-total">
+      <summary>Add the sampled flash levels</summary>
+      <p id="flash-sample-total-readout" class="readout">Updates 0–0: 1.000 level-samples. Current flash: 100.00%.</p>
+      <p id="flash-sample-total-help" class="muted">This adds one retained level at each logical update, including the full flash at update zero. It is a discrete sample total, not another lamp and not a measured exposure. Changing the update rate can change the sample total without changing a per-second decay rule.</p>
+    </details>
 
     <section class="second-flash" aria-labelledby="second-title">
       <h2 id="second-title">A second flash</h2>
