@@ -1,0 +1,70 @@
+{
+  "slug": "fading-light",
+  "mode": "bursts",
+  "lane": 14,
+  "title": "Fading Light — Offer the same finite light at three different spacings",
+  "group": "Same offers, different spacing",
+  "helpID": "light-finite-spacing-help",
+  "help": "Each recipe starts at seventy percent and offers two more full pulses of the same amount. Only the spacing changes. The cap may reject offered light, and the final pulse arrives at a different time. Update ninety-six compares what remains, not the sum offered. Applying does not run the clock.",
+  "rows": [
+    [
+      "finite-spacing-twelve",
+      "Two additions twelve updates apart",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.7",
+        "equal",
+        "2",
+        "30",
+        "update",
+        "96"
+      ]
+    ],
+    [
+      "finite-spacing-twenty-four",
+      "Two additions twenty-four updates apart",
+      [
+        "0.9",
+        "0.995",
+        "24",
+        "0.7",
+        "equal",
+        "2",
+        "30",
+        "update",
+        "96"
+      ]
+    ],
+    [
+      "finite-spacing-forty-eight",
+      "Two additions forty-eight updates apart",
+      [
+        "0.9",
+        "0.995",
+        "48",
+        "0.7",
+        "equal",
+        "2",
+        "30",
+        "update",
+        "96"
+      ]
+    ]
+  ],
+  "depends": "752",
+  "message": "bursts experiments keep the supplied choices silent and reversible",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ],
+  "facts": "All three offer initial.7 plus TWO additional.7 pulses, total2.1 offered units, NOT held light/sample sum/exposure. Fields retention/retention-b/pulse-spacing/pulse-amount/pulse-pattern/pulse-count/update-rate/decay-unit/frame exactly as fixture. Native spacing12/24/48, count2 and frame0..120 exist. L0=.7; for i1..96,L=min(1,.9*previous+(.7 if i%spacing==0 and i/spacing<=2 else0)). RetentionB remains.995, rate30, decayunitupdate. Only recipes/data/helpers/import queries change."
+}
