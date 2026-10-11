@@ -1,0 +1,69 @@
+{
+  "slug": "fading-light",
+  "mode": "bursts",
+  "lane": 14,
+  "title": "Fading Light \u2014 Let the same second pulse meet three different tails",
+  "group": "A pulse meets its tail",
+  "helpID": "light-tail-cap-study-help",
+  "help": "Each experiment offers seventy percent at the start and again at update twelve. Only the fraction kept per update changes. A brighter surviving tail can reject more of the same new pulse; clipped light is not held for later.",
+  "depends": "752",
+  "message": "three identical offered pulses meet different decayed tails on one capped train",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ],
+  "rows": [
+    [
+      "tail-slow-cap",
+      "Long tail, clipped second pulse",
+      [
+        "0.995",
+        "0.9",
+        "12",
+        "0.7",
+        "equal",
+        "1",
+        "30",
+        "update",
+        "12"
+      ]
+    ],
+    [
+      "tail-middle-cap",
+      "Middle tail, clipped second pulse",
+      [
+        "0.98",
+        "0.9",
+        "12",
+        "0.7",
+        "equal",
+        "1",
+        "30",
+        "update",
+        "12"
+      ]
+    ],
+    [
+      "tail-fast-room",
+      "Short tail, room for the second pulse",
+      [
+        "0.9",
+        "0.9",
+        "12",
+        "0.7",
+        "equal",
+        "1",
+        "30",
+        "update",
+        "12"
+      ]
+    ]
+  ]
+}
