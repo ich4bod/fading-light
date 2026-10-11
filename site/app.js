@@ -29,6 +29,7 @@
   const flashNextUpdateReadout = document.querySelector("#flash-next-update-readout");
   const seekFlashGap = document.querySelector("#seek-flash-gap");
   const flashGapInfo = document.querySelector("#flash-gap-info");
+  const flashCrossingRows = document.querySelector("#flash-crossing-rows");
   const pulseSpacing = document.querySelector("#pulse-spacing");
   const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
@@ -232,6 +233,22 @@
     const firstUpdate = Math.ceil(Math.log(target) / Math.log(r));
     const rB = effectiveRetention(Number(retentionB.value));
     const levelB = rB ** n;
+    flashCrossingRows.replaceChildren();
+    for (const [label, target] of [["50%", 0.5], ["10%", 0.1], ["1%", 0.01]]) {
+      const row = document.createElement("tr");
+      const levelCell = document.createElement("td");
+      levelCell.textContent = label;
+      row.append(levelCell);
+      for (const retentionValue of [r, rB]) {
+        const crossing = Math.ceil(Math.log(target) / Math.log(retentionValue));
+        const updateCell = document.createElement("td");
+        updateCell.textContent = crossing > 120 ? `${crossing} (past 120)` : String(crossing);
+        const secondsCell = document.createElement("td");
+        secondsCell.textContent = (crossing / currentRate).toFixed(2);
+        row.append(updateCell, secondsCell);
+      }
+      flashCrossingRows.append(row);
+    }
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
