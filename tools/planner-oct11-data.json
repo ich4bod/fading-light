@@ -1,0 +1,67 @@
+{
+  "mode": "bursts",
+  "lane": 14,
+  "depends": "752",
+  "title": "Fading Light \u2014 Compare one second under per-update and per-second decay",
+  "message": "three clock studies separate update count from a shared logical second",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ],
+  "rows": [
+    [
+      "clock-30",
+      "One second at thirty updates",
+      [
+        "0.98",
+        "0.98",
+        "24",
+        "0.35",
+        "equal",
+        "0",
+        "30",
+        "update",
+        "30"
+      ]
+    ],
+    [
+      "clock-60-update",
+      "One second at sixty with unchanged fraction",
+      [
+        "0.98",
+        "0.98",
+        "24",
+        "0.35",
+        "equal",
+        "0",
+        "60",
+        "update",
+        "60"
+      ]
+    ],
+    [
+      "clock-60-second",
+      "One second at sixty with matched decay",
+      [
+        "0.98",
+        "0.98",
+        "24",
+        "0.35",
+        "equal",
+        "0",
+        "60",
+        "second",
+        "60"
+      ]
+    ]
+  ],
+  "help": "The first and third flashes keep the same fraction after one logical second. The middle keeps the same fraction per update and therefore fades further at sixty updates. No later pulses are added.",
+  "helpID": "light-clock-study-help"
+}
