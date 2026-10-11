@@ -1,0 +1,15 @@
+{
+  "pulserecall": {
+    "lane": 14,
+    "depends": "nothing",
+    "title": "Fading Light \u2014 Return only the saved pulse recipe at the current clock",
+    "message": "returning a pulse recipe restores only spacing amount pattern and count at the current clock",
+    "buttons": [
+      "return-pulse-recipe"
+    ],
+    "copy": {
+      "return-pulse-recipe": "Use the kept pulse recipe",
+      "return-pulse-recipe-help": "Copy the kept spacing, amount, alternating pattern and pulse count. Both flash fractions, the inspected update and the clock choices stay put. This changes the current train, not the saved experiment."
+    }
+  }
+}
