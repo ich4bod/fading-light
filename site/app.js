@@ -59,6 +59,13 @@
   const trainCursor = document.querySelector("#train-cursor");
   const keepLight = document.querySelector("#keep-light");
   const returnLight = document.querySelector("#return-light");
+  const lightStudy = document.querySelector("#light-study");
+  const lightStudyApply = document.querySelector("#light-study-apply");
+  const lightStudies = {
+    tail: ["0.995", "0.9", "12", "0.7", "equal", "1", "30", "update", "24"],
+    steps: ["0.9", "0.995", "12", "0.35", "equal", "all", "30", "update", "24"],
+    seconds: ["0.9", "0.995", "12", "0.35", "equal", "all", "60", "second", "24"]
+  };
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");
   const keptPulseCountInfo = document.querySelector("#kept-pulse-count-info");
@@ -280,6 +287,17 @@
     keepLight.disabled = running;
     returnLight.disabled = running || keptLight === null ||
       sameExperiment(currentExperiment(), keptLight);
+    lightStudyApply.disabled = running || sameExperiment(currentExperiment(), {
+      rA: Number(lightStudies[lightStudy.value][0]),
+      rB: Number(lightStudies[lightStudy.value][1]),
+      k: Number(lightStudies[lightStudy.value][2]),
+      a: Number(lightStudies[lightStudy.value][3]),
+      pattern: lightStudies[lightStudy.value][4],
+      additionalpulses: lightStudies[lightStudy.value][5],
+      rate: Number(lightStudies[lightStudy.value][6]),
+      decayUnit: lightStudies[lightStudy.value][7],
+      n: Number(lightStudies[lightStudy.value][8])
+    });
     swapFlashRetentions.disabled = retention.value === retentionB.value;
     forgetLight.disabled = keptLight === null;
     showKeptCurve.disabled = keptLight === null;
@@ -395,6 +413,28 @@
     retentionB.value = first;
     render();
   });
+  lightStudyApply.addEventListener("click", () => {
+    const values = lightStudies[lightStudy.value];
+    const study = {
+      rA: Number(values[0]), rB: Number(values[1]), k: Number(values[2]),
+      a: Number(values[3]), pattern: values[4], additionalpulses: values[5],
+      rate: Number(values[6]), decayUnit: values[7], n: Number(values[8])
+    };
+    if (running || sameExperiment(currentExperiment(), study)) return;
+    pauseForControlChange(false);
+    retention.value = values[0];
+    retentionB.value = values[1];
+    pulseSpacing.value = values[2];
+    pulseAmount.value = values[3];
+    pulsePattern.value = values[4];
+    pulseCount.value = values[5];
+    updateRate.value = values[6];
+    currentRate = study.rate;
+    decayUnit.value = values[7];
+    currentDecayUnit = study.decayUnit;
+    frame.value = values[8];
+    render();
+  });
   returnLight.addEventListener("click", () => {
     if (running || keptLight === null || sameExperiment(currentExperiment(), keptLight)) return;
     frame.value = String(keptLight.n);
@@ -417,6 +457,7 @@
     render();
   });
   showKeptCurve.addEventListener("change", render);
+  lightStudy.addEventListener("change", render);
 
   seekFlashGap.addEventListener("click", () => {
     const flashGap = bestFlashGap(

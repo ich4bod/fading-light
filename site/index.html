@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=16">
-  <script src="/app.js?v=25" defer></script>
+  <link rel="stylesheet" href="/style.css?v=17">
+  <script src="/app.js?v=26" defer></script>
 </head>
 <body>
   <main>
@@ -227,6 +227,22 @@
         <p id="pulse-parts-help" class="muted">Gold is the accepted part of the last pulse, after its later decay. Coral is earlier light. Both share the same zero-to-one scale; clipped input was never stored.</p>
       </details>
     </section>
+
+    <details id="light-studies">
+      <summary>Try three light experiments</summary>
+      <div class="control">
+        <label for="light-study">Light study</label>
+        <select id="light-study">
+          <option value="tail" selected>One pulse and its tail</option>
+          <option value="steps">A train before the cap</option>
+          <option value="seconds">Same decay at sixty</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button id="light-study-apply" type="button">Use this experiment</button>
+      </div>
+      <p id="light-study-help" class="muted">Load all the settings and update together. The lamps stay paused and your kept experiment stays put. Pulse spacing is still counted in updates.</p>
+    </details>
 
     <details id="light-memory-drawer">
       <summary>Keep one experiment for comparison</summary>

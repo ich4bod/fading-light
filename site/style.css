@@ -164,6 +164,35 @@ input[type="range"] {
   font: 16px system-ui, sans-serif;
 }
 
+#light-studies {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+  border: 1px solid #b8bcc6;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff3dc;
+  background: #18232c;
+}
+
+#light-studies > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font: 16px system-ui, sans-serif;
+}
+
+#light-studies select,
+#light-studies button {
+  min-height: 45px;
+}
+
+#light-studies[hidden] {
+  display: none;
+}
+
 #light-memory-drawer {
   display: grid;
   gap: 8px;
