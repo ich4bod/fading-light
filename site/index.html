@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=14">
+  <link rel="stylesheet" href="/style.css?v=15">
   <script src="/app.js?v=25" defer></script>
 </head>
 <body>
@@ -46,7 +46,6 @@
           <option value="update" selected>Fraction per update</option>
           <option value="second">Decay per second</option>
         </select>
-        <p id="decay-unit-help" class="muted">Matching seconds changes the fraction used at each update. Only decay is matched; pulse spacing is still in updates.</p>
       </div>
       <div class="actions">
         <button id="seek-threshold" type="button">Go to this level</button>
@@ -68,14 +67,19 @@
       <div id="flash-glow" class="glow"></div>
     </div>
 
-    <p id="threshold-info" class="muted">First whole update at or below 50%: 35.</p>
-    <p id="threshold-help" class="muted">A crossing between updates is rounded up. A level beyond this strip cannot be reached here.</p>
+    <details id="flash-clock-notes">
+      <summary>Read the crossing and the clock</summary>
+      <p id="threshold-info" class="muted">First whole update at or below 50%: 35.</p>
+      <p id="threshold-help" class="muted">A crossing between updates is rounded up. A level beyond this strip cannot be reached here.</p>
+      <p id="time-unit" class="muted">At 30 updates per second, frame 0 corresponds to 0.00 seconds.</p>
+      <p id="half-level" class="muted">Half the starting level after 34.31 updates.</p>
+      <p id="half-time" class="muted">At this rate, half the starting level takes 1.14 seconds.</p>
+      <p id="rate-help" class="muted">Changing the rate pauses playback. The same update number keeps the same level; only its time in seconds changes.</p>
+      <p id="decay-unit-help" class="muted">Matching seconds changes the fraction used at each update. Only decay is matched; pulse spacing is still in updates.</p>
+    </details>
+
     <p id="play-status" class="muted" aria-live="polite">Paused.</p>
     <p>Playback uses elapsed time, not the number of screen redraws. Pause or move the update slider to inspect a pulse.</p>
-    <p id="time-unit" class="muted">At 30 updates per second, frame 0 corresponds to 0.00 seconds.</p>
-    <p id="half-level" class="muted">Half the starting level after 34.31 updates.</p>
-    <p id="half-time" class="muted">At this rate, half the starting level takes 1.14 seconds.</p>
-    <p id="rate-help" class="muted">Changing the rate pauses playback. The same update number keeps the same level; only its time in seconds changes.</p>
 
     <section class="second-flash" aria-labelledby="second-title">
       <h2 id="second-title">A second flash</h2>
