@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=17">
-  <script src="/app.js?v=26" defer></script>
+  <link rel="stylesheet" href="/style.css?v=18">
+  <script src="/app.js?v=27" defer></script>
 </head>
 <body>
   <main>
@@ -212,6 +212,16 @@
       </details>
       <p id="train-level" class="readout" aria-live="polite">Frame 0 · pulse-train level 35.00%.</p>
       <p id="pulse-arithmetic">No added pulse has occurred after the initial level.</p>
+      <details id="pulse-additions">
+        <summary>Read the additions so far</summary>
+        <table id="pulse-additions-table">
+          <thead>
+            <tr><th scope="col">Update</th><th scope="col">Before</th><th scope="col">Added</th><th scope="col">Clipped</th><th scope="col">After</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="pulse-additions-help" class="muted">Before means the decayed train just before that addition. Added is the offered pulse; Clipped is the part the cap rejects. After is what remains. Empty scheduled slots are not additions.</p>
+      </details>
       <p id="pulse-arithmetic-help" class="muted">This is the most recent added pulse, not the level at every later update. Clipped level is discarded by the toy’s cap.</p>
       <div class="lamp" role="img" aria-label="Mathematical pulse-train level">
         <div id="train-glow" class="glow"></div>

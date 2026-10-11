@@ -252,6 +252,33 @@ input[type="range"] {
   margin-top: 12px;
 }
 
+#pulse-additions {
+  margin-top: 12px;
+}
+
+#pulse-additions > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+#pulse-additions-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font: 14px system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+#pulse-additions-table th,
+#pulse-additions-table td {
+  padding: 4px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
 #pulse-pattern-control {
   gap: 8px;
 }

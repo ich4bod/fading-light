@@ -44,6 +44,7 @@
   const trainTailInfo = document.querySelector("#train-tail-info");
   const trainLevel = document.querySelector("#train-level");
   const pulseArithmetic = document.querySelector("#pulse-arithmetic");
+  const pulseAdditionsTable = document.querySelector("#pulse-additions-table tbody");
   const trainGlow = document.querySelector("#train-glow");
   const curve = document.querySelector("#flash-curve");
   const curveB = document.querySelector("#second-curve");
@@ -252,6 +253,25 @@
       const addition = addedAmount(lastPulse, spacing, amount, count, pattern);
       const clipped = Math.max(0, decayed + addition - 1);
       pulseArithmetic.textContent = `Pulse at update ${lastPulse}: after decay ${(100 * decayed).toFixed(2)}% + pulse ${(100 * addition).toFixed(2)}% − clipped ${(100 * clipped).toFixed(2)}% = ${(100 * trainValues[lastPulse]).toFixed(2)}%.`;
+    }
+    pulseAdditionsTable.replaceChildren();
+    const additionRows = [[0, 0, amount, 0, trainValues[0]]];
+    for (let j = 1; j <= n; j++) {
+      if (!activePulse(j, spacing, count)) continue;
+      const before = r * trainValues[j - 1];
+      const addition = addedAmount(j, spacing, amount, count, pattern);
+      const clipped = Math.max(0, before + addition - 1);
+      additionRows.push([j, before, addition, clipped, trainValues[j]]);
+    }
+    for (const row of additionRows) {
+      const tr = document.createElement("tr");
+      row.forEach((value, index) => {
+        const cell = document.createElement(index === 0 ? "th" : "td");
+        if (index === 0) cell.scope = "row";
+        cell.textContent = index === 0 ? String(value) : `${(100 * value).toFixed(2)}%`;
+        tr.append(cell);
+      });
+      pulseAdditionsTable.append(tr);
     }
 
     retentionLabel.textContent = currentDecayUnit === "second"
