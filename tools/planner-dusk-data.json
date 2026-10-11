@@ -1,0 +1,69 @@
+{
+  "slug": "fading-light",
+  "mode": "bursts",
+  "lane": 14,
+  "title": "Fading Light \u2014 Read three finite bursts after their last offered pulse",
+  "group": "After the last addition",
+  "helpID": "light-after-burst-help",
+  "help": "All three lamps begin at thirty-five percent and retain ninety-eight percent per update. Extra equal pulses arrive every twelve updates, then stop after one, two or four additions. At update seventy-two each burst has ended. This reads retained lamp level, not accumulated exposure.",
+  "rows": [
+    [
+      "after-one",
+      "One extra pulse, then fading",
+      [
+        "0.98",
+        "0.9",
+        "12",
+        "0.35",
+        "equal",
+        "1",
+        "30",
+        "update",
+        "72"
+      ]
+    ],
+    [
+      "after-two",
+      "Two extra pulses, then fading",
+      [
+        "0.98",
+        "0.9",
+        "12",
+        "0.35",
+        "equal",
+        "2",
+        "30",
+        "update",
+        "72"
+      ]
+    ],
+    [
+      "after-four",
+      "Four extra pulses, then fading",
+      [
+        "0.98",
+        "0.9",
+        "12",
+        "0.35",
+        "equal",
+        "4",
+        "30",
+        "update",
+        "72"
+      ]
+    ]
+  ],
+  "depends": "nothing",
+  "message": "bursts comparisons preserve the authored experiment without replacing its memory",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ]
+}
