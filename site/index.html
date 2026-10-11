@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=21">
-  <script src="/app.js?v=30" defer></script>
+  <link rel="stylesheet" href="/style.css?v=22">
+  <script src="/app.js?v=31" defer></script>
 </head>
 <body>
   <main>
@@ -97,6 +97,12 @@
       <p id="half-time" class="muted">At this rate, half the starting level takes 1.14 seconds.</p>
       <p id="rate-help" class="muted">Changing the rate pauses playback. The same update number keeps the same level; only its time in seconds changes.</p>
       <p id="decay-unit-help" class="muted">Matching seconds changes the fraction used at each update. Only decay is matched; pulse spacing is still in updates.</p>
+    </details>
+
+    <details id="flash-per-second">
+      <summary>Read one second of decay</summary>
+      <p id="flash-per-second-readout" class="readout">After one logical second: first 54.548% · second 4.239% of each starting flash.</p>
+      <p id="flash-per-second-help" class="muted">A fraction kept at every update is not a fraction kept over a second. Matching decay per second adjusts the per-update fraction when the logical rate changes. Pulse spacing stays in updates.</p>
     </details>
 
     <p id="play-status" class="muted" aria-live="polite">Paused.</p>

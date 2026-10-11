@@ -27,6 +27,7 @@
   const secondLevel = document.querySelector("#second-level");
   const flashSampleTotalReadout = document.querySelector("#flash-sample-total-readout");
   const flashNextUpdateReadout = document.querySelector("#flash-next-update-readout");
+  const flashPerSecondReadout = document.querySelector("#flash-per-second-readout");
   const seekFlashGap = document.querySelector("#seek-flash-gap");
   const flashGapInfo = document.querySelector("#flash-gap-info");
   const flashCrossingRows = document.querySelector("#flash-crossing-rows");
@@ -233,6 +234,7 @@
     const firstUpdate = Math.ceil(Math.log(target) / Math.log(r));
     const rB = effectiveRetention(Number(retentionB.value));
     const levelB = rB ** n;
+    flashPerSecondReadout.textContent = `After one logical second: first ${(100 * r ** currentRate).toFixed(3)}% · second ${(100 * rB ** currentRate).toFixed(3)}% of each starting flash.`;
     flashCrossingRows.replaceChildren();
     for (const [label, target] of [["50%", 0.5], ["10%", 0.1], ["1%", 0.01]]) {
       const row = document.createElement("tr");

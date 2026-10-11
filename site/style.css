@@ -164,6 +164,35 @@ input[type="range"] {
   font: 16px system-ui, sans-serif;
 }
 
+#flash-per-second {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  border: 1px solid #b8bcc6;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff3dc;
+  background: #18232c;
+}
+
+#flash-per-second > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font: 16px system-ui, sans-serif;
+}
+
+#flash-per-second > .readout {
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+
+#flash-per-second > .muted {
+  overflow-wrap: anywhere;
+}
+
 #flash-sample-total {
   display: grid;
   gap: 8px;
