@@ -1,0 +1,69 @@
+{
+  "slug": "fading-light",
+  "mode": "bursts",
+  "lane": 14,
+  "title": "Fading Light — Compare full and half-sized answers after a finite burst",
+  "group": "Smaller alternate answers",
+  "helpID": "light-half-burst-study-help",
+  "help": "Each train begins at thirty-five percent. Equal answers offer that amount every twelve updates; alternate answers offer half as much at odd pulse numbers. The finite alternate burst offers only two additional pulses, so update thirty-six contains no new offer. Applying seeks that update without running the clock.",
+  "rows": [
+    [
+      "burst-equal-three",
+      "Three full answers",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.35",
+        "equal",
+        "3",
+        "30",
+        "update",
+        "36"
+      ]
+    ],
+    [
+      "burst-half-three",
+      "Three alternating answers",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.35",
+        "half",
+        "3",
+        "30",
+        "update",
+        "36"
+      ]
+    ],
+    [
+      "burst-half-two",
+      "Two alternating answers, then silence",
+      [
+        "0.9",
+        "0.995",
+        "12",
+        "0.35",
+        "half",
+        "2",
+        "30",
+        "update",
+        "36"
+      ]
+    ]
+  ],
+  "depends": "752",
+  "message": "bursts choices preserve exact authored data and the independent kept experiment",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ]
+}
