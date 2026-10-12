@@ -32,6 +32,8 @@
   const flashGapInfo = document.querySelector("#flash-gap-info");
   const flashRatioReadout = document.querySelector("#flash-ratio-readout");
   const flashCrossingRows = document.querySelector("#flash-crossing-rows");
+  const flashCrossingLevel = document.querySelector("#flash-crossing-level");
+  const flashSeekCrossing = document.querySelector("#flash-seek-crossing");
   const pulseSpacing = document.querySelector("#pulse-spacing");
   const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
   const pulseSlotNext = document.querySelector("#pulse-slot-next");
@@ -111,6 +113,27 @@
 
   function effectiveRetention(raw) {
     return currentDecayUnit === "second" ? raw ** (30 / currentRate) : raw;
+  }
+
+  function sharedCrossingCandidate(rA, rB, target, n) {
+    const crossing = Math.max(
+      Math.ceil(Math.log(target) / Math.log(rA)),
+      Math.ceil(Math.log(target) / Math.log(rB))
+    );
+    return Number.isInteger(crossing) && crossing >= 0 && crossing <= 120 && crossing !== n
+      ? crossing : null;
+  }
+
+  function currentSharedCrossingCandidate() {
+    return sharedCrossingCandidate(
+      effectiveRetention(Number(retention.value)),
+      effectiveRetention(Number(retentionB.value)),
+      Number(flashCrossingLevel.value), Number(frame.value)
+    );
+  }
+
+  function refreshSharedCrossingEligibility() {
+    flashSeekCrossing.disabled = currentSharedCrossingCandidate() === null;
   }
 
   function bestFlashGap(rA, rB) {
@@ -253,6 +276,7 @@
       }
       flashCrossingRows.append(row);
     }
+    refreshSharedCrossingEligibility();
     const spacing = Number(pulseSpacing.value);
     const amount = Number(pulseAmount.value);
     const count = pulseCount.value;
@@ -515,6 +539,15 @@
     );
     pauseForControlChange(false);
     frame.value = String(flashGap.n);
+    render();
+  });
+
+  flashCrossingLevel.addEventListener("change", refreshSharedCrossingEligibility);
+  flashSeekCrossing.addEventListener("click", () => {
+    const candidate = currentSharedCrossingCandidate();
+    if (candidate === null) return;
+    pauseForControlChange(false);
+    frame.value = String(candidate);
     render();
   });
 

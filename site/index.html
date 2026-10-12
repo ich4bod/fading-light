@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=23">
-  <script src="/app.js?v=32" defer></script>
+  <link rel="stylesheet" href="/style.css?v=24">
+  <script src="/app.js?v=33" defer></script>
 </head>
 <body>
   <main>
@@ -157,6 +157,18 @@
           <tbody id="flash-crossing-rows"></tbody>
         </table>
         <p id="flash-crossing-help" class="muted">Each update is the first discrete sample at or below the stated level. A result past 120 lies outside this chart; it is not clipped to the last point. Seconds use the current logical update rate.</p>
+        <div class="flash-crossing-inspector">
+          <label for="flash-crossing-level">Inspect both flashes at or below</label>
+          <select id="flash-crossing-level">
+            <option value="0.5" selected>50% of the start</option>
+            <option value="0.1">10% of the start</option>
+            <option value="0.01">1% of the start</option>
+          </select>
+          <div class="actions">
+            <button id="flash-seek-crossing" type="button">Inspect the shared crossing</button>
+          </div>
+          <p id="flash-seek-crossing-help" class="muted">Choose a level, then inspect the earliest update where both flashes are at or below it. Beyond this chart, the button stays unavailable. This moves the clock, not the decay choices or kept experiment.</p>
+        </div>
       </details>
       <div class="lamp" role="img" aria-label="Second mathematical flash level">
         <div id="second-glow" class="glow"></div>

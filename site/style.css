@@ -392,6 +392,26 @@ input[type="range"] {
   font: 16px system-ui, sans-serif;
 }
 
+#flash-crossings .flash-crossing-inspector {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+#flash-crossings .flash-crossing-inspector > p {
+  margin: 0;
+}
+
+#flash-crossing-level,
+#flash-seek-crossing {
+  min-height: 45px;
+  max-width: 100%;
+}
+
+#flash-seek-crossing {
+  overflow-wrap: anywhere;
+}
+
 #flash-crossing-table {
   width: 100%;
   max-width: 100%;
