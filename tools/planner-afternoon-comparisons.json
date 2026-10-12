@@ -1,0 +1,230 @@
+{
+  "tail-retentions": {
+    "slug": "fading-light",
+    "mode": "bursts",
+    "lane": 14,
+    "depends": 913,
+    "title": "Fading Light \u2014 Compare three tails after the same two pulses",
+    "group": "Two pulses, three tail retentions",
+    "rows": [
+      [
+        "tail-retentions-0",
+        "Retain 0.9 per update",
+        [
+          "0.9",
+          "0.9",
+          "24",
+          "0.35",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "120"
+        ]
+      ],
+      [
+        "tail-retentions-1",
+        "Retain 0.98 per update",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "120"
+        ]
+      ],
+      [
+        "tail-retentions-2",
+        "Retain 0.995 per update",
+        [
+          "0.995",
+          "0.9",
+          "24",
+          "0.35",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "120"
+        ]
+      ]
+    ],
+    "notes": [
+      "At update 120, the train reads 0.02%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.9 per update. Loading stays paused.",
+      "At update 120, the train reads 16.30%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+      "At update 120, the train reads 65.21%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.995 per update. Loading stays paused."
+    ],
+    "noteID": "choice-note-fading-light",
+    "noteLead": "About the selected choice: ",
+    "picker": "light-study",
+    "facts": "Initial x0=amount. xn=min(1,r*x(n-1)+pulse), pulses at positive multiples24 through specified count; alternating odd pulse half/even full. Exact rounded train levels [0.02, 16.3, 65.21] percent, computed on host. FlashB=.9 per update. All native choices exist; count counts EXTRA pulses, not initialflash.",
+    "message": "tail-retentions choices preserve exact data silent selection and independent memory",
+    "fields": [
+      "retention",
+      "retention-b",
+      "pulse-spacing",
+      "pulse-amount",
+      "pulse-pattern",
+      "pulse-count",
+      "update-rate",
+      "decay-unit",
+      "frame"
+    ]
+  },
+  "alternating-ending": {
+    "slug": "fading-light",
+    "mode": "bursts",
+    "lane": 14,
+    "depends": 913,
+    "title": "Fading Light \u2014 End an alternating burst on its weak or strong pulse",
+    "group": "An alternating burst ends",
+    "rows": [
+      [
+        "alternating-ending-0",
+        "End after one extra pulse",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "half",
+          "1",
+          "30",
+          "update",
+          "96"
+        ]
+      ],
+      [
+        "alternating-ending-1",
+        "End after 2 extra pulses",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "half",
+          "2",
+          "30",
+          "update",
+          "96"
+        ]
+      ],
+      [
+        "alternating-ending-2",
+        "End after 4 extra pulses",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "half",
+          "4",
+          "30",
+          "update",
+          "96"
+        ]
+      ]
+    ],
+    "notes": [
+      "At update 96, the train reads 9.12%. It began with 0.35 and received 1 extra half/full alternating additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+      "At update 96, the train reads 22.39%. It began with 0.35 and received 2 extra half/full alternating additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+      "At update 96, the train reads 68.17%. It began with 0.35 and received 4 extra half/full alternating additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused."
+    ],
+    "noteID": "choice-note-fading-light",
+    "noteLead": "About the selected choice: ",
+    "picker": "light-study",
+    "facts": "Initial x0=amount. xn=min(1,r*x(n-1)+pulse), pulses at positive multiples24 through specified count; alternating odd pulse half/even full. Exact rounded train levels [9.12, 22.39, 68.17] percent, computed on host. FlashB=.9 per update. All native choices exist; count counts EXTRA pulses, not initialflash.",
+    "message": "alternating-ending choices preserve exact data silent selection and independent memory",
+    "fields": [
+      "retention",
+      "retention-b",
+      "pulse-spacing",
+      "pulse-amount",
+      "pulse-pattern",
+      "pulse-count",
+      "update-rate",
+      "decay-unit",
+      "frame"
+    ]
+  },
+  "late-tail": {
+    "slug": "fading-light",
+    "mode": "bursts",
+    "lane": 14,
+    "depends": 913,
+    "title": "Fading Light \u2014 Read one finished burst at three later updates",
+    "group": "One burst, three later readings",
+    "rows": [
+      [
+        "late-tail-0",
+        "Read update 48",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "48"
+        ]
+      ],
+      [
+        "late-tail-1",
+        "Read update 96",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "96"
+        ]
+      ],
+      [
+        "late-tail-2",
+        "Read update 120",
+        [
+          "0.98",
+          "0.9",
+          "24",
+          "0.35",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "120"
+        ]
+      ]
+    ],
+    "notes": [
+      "At update 48, the train reads 69.82%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+      "At update 96, the train reads 26.48%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+      "At update 120, the train reads 16.30%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused."
+    ],
+    "noteID": "choice-note-fading-light",
+    "noteLead": "About the selected choice: ",
+    "picker": "light-study",
+    "facts": "Initial x0=amount. xn=min(1,r*x(n-1)+pulse), pulses at positive multiples24 through specified count; alternating odd pulse half/even full. Exact rounded train levels [69.82, 26.48, 16.3] percent, computed on host. FlashB=.9 per update. All native choices exist; count counts EXTRA pulses, not initialflash.",
+    "message": "late-tail choices preserve exact data silent selection and independent memory",
+    "fields": [
+      "retention",
+      "retention-b",
+      "pulse-spacing",
+      "pulse-amount",
+      "pulse-pattern",
+      "pulse-count",
+      "update-rate",
+      "decay-unit",
+      "frame"
+    ]
+  }
+}

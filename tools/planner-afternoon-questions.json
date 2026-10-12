@@ -1,0 +1,68 @@
+{
+  "slug": "fading-light",
+  "lane": 14,
+  "title": "Fading Light \u2014 Ask where an offered pulse goes when the lamp is full",
+  "id": "three-questions-fading-light",
+  "summary": "Questions about keeping and clipping",
+  "lead": "Pause the lamps before inspecting an update. The numbers belong to a mathematical light; updates and seconds are not interchangeable.",
+  "questions": [
+    {
+      "title": "Is a rejected pulse secretly waiting?",
+      "prompt": "Pause. Choose Fraction per update, fraction 0.995, pulse amount 0.7, Equal additions, Keep adding and spacing 12 updates. Inspect update 12, then open Read the additions so far.",
+      "answer": "The decayed train offers 65.91% before the new 70.00% pulse. Together they exceed the cap, so 35.91% is clipped and the lamp holds 100.00%. The rejected part is not stored for a later update. Continuing the train cannot retrieve it."
+    },
+    {
+      "title": "Does a faster clock keep the same decay?",
+      "prompt": "Choose decay per update with fraction 0.995. Compare one logical second at 30 and 60 updates per second. Then choose decay per second instead.",
+      "answer": "Per update keeps about 86.04% after 30 updates and 74.03% after 60. Per second uses the reference thirty-update decay for one logical second at either rate. A rate change means something different depending on the unit of the retention rule."
+    },
+    {
+      "title": "Is adding the sampled levels an exposure measurement?",
+      "prompt": "Inspect the optional sampled-level sum after several flash updates. Compare that number with the level at the current update.",
+      "answer": "They answer different questions. The current level is one retained value. The sum adds discrete sampled levels, including the initial sample; it is not a time integral. Without sample duration and a physical light scale, calling it real exposure would invent units the toy does not have."
+    },
+    {
+      "title": "Is update 48 before or after the last pulse?",
+      "prompt": "Choose Read update 48 from the finished-burst comparisons. Inspect the pulse count as well as the current train.",
+      "answer": "Two extra pulses arrive at updates 24 and 48. The displayed update includes the addition at that update, so 48 is the last pulse after it has arrived. Later readings contain only decay of this completed train."
+    },
+    {
+      "title": "Can a weak last pulse leave less than a strong earlier one?",
+      "prompt": "Compare an alternating burst ending after one extra pulse with one ending after two. Both are inspected at update 96.",
+      "answer": "Yes. The one-pulse burst ends on the half addition at 24. The two-pulse burst also receives a full addition at 48. At update 96 they read 9.12% and 22.39%. Their final levels depend on amount and time since addition, not just on the word alternating."
+    },
+    {
+      "title": "Does a long tail mean new light is still arriving?",
+      "prompt": "Compare the three retentions after the same two pulses at update 120. Check that the pulse count is still two.",
+      "answer": "No. All three trains stopped adding after update 48. A higher retained fraction can leave more of the old train visible. A lingering response is not evidence that its source is continuing to add pulses."
+    }
+  ],
+  "facts": "r=.995; Compute exact levels on host before posting; guide rounds100*r^30/60 to2decimals and capped update12before100*.7*r^12 to2decimals. Effective persecond r^(30/rate). Pulse pattern equal, pulsecount All; starting cursor no sound.",
+  "palette": "#101820/#fff3dc/#b8bcc6/#ffd166",
+  "files": [
+    "site/index.html",
+    "site/style.css"
+  ],
+  "root": "main",
+  "anchor": "footer",
+  "url": "https://fading-light.ichabod-crane.net/",
+  "message": "six fading-light questions keep their answers optional and leave the experiment unchanged",
+  "oldSummary": "Try three questions about keeping and clipping",
+  "appendQuestions": [
+    {
+      "title": "Is update 48 before or after the last pulse?",
+      "prompt": "Choose Read update 48 from the finished-burst comparisons. Inspect the pulse count as well as the current train.",
+      "answer": "Two extra pulses arrive at updates 24 and 48. The displayed update includes the addition at that update, so 48 is the last pulse after it has arrived. Later readings contain only decay of this completed train."
+    },
+    {
+      "title": "Can a weak last pulse leave less than a strong earlier one?",
+      "prompt": "Compare an alternating burst ending after one extra pulse with one ending after two. Both are inspected at update 96.",
+      "answer": "Yes. The one-pulse burst ends on the half addition at 24. The two-pulse burst also receives a full addition at 48. At update 96 they read 9.12% and 22.39%. Their final levels depend on amount and time since addition, not just on the word alternating."
+    },
+    {
+      "title": "Does a long tail mean new light is still arriving?",
+      "prompt": "Compare the three retentions after the same two pulses at update 120. Check that the pulse count is still two.",
+      "answer": "No. All three trains stopped adding after update 48. A higher retained fraction can leave more of the old train visible. A lingering response is not evidence that its source is continuing to add pulses."
+    }
+  ]
+}
