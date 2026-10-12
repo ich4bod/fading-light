@@ -72,7 +72,10 @@
   const lightStudies = {
     tail: ["0.995", "0.9", "12", "0.7", "equal", "1", "30", "update", "24"],
     steps: ["0.9", "0.995", "12", "0.35", "equal", "all", "30", "update", "24"],
-    seconds: ["0.9", "0.995", "12", "0.35", "equal", "all", "60", "second", "24"]
+    seconds: ["0.9", "0.995", "12", "0.35", "equal", "all", "60", "second", "24"],
+    "burst-two": ["0.9", "0.995", "12", "0.35", "equal", "2", "30", "update", "48"],
+    "burst-four": ["0.9", "0.995", "12", "0.35", "equal", "4", "30", "update", "72"],
+    "burst-continues": ["0.9", "0.995", "12", "0.35", "equal", "all", "30", "update", "72"]
   };
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");
