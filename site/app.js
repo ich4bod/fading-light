@@ -67,6 +67,7 @@
   const trainCursor = document.querySelector("#train-cursor");
   const keepLight = document.querySelector("#keep-light");
   const returnLight = document.querySelector("#return-light");
+  const returnPulseRecipe = document.querySelector("#return-pulse-recipe");
   const lightStudy = document.querySelector("#light-study");
   const lightStudyApply = document.querySelector("#light-study-apply");
   const lightStudies = {
@@ -115,6 +116,12 @@
     return a.n === b.n && a.rA === b.rA && a.rB === b.rB &&
       a.k === b.k && a.a === b.a && a.pattern === b.pattern && a.rate === b.rate &&
       a.decayUnit === b.decayUnit && a.additionalpulses === b.additionalpulses;
+  }
+
+  function canReturnPulseRecipe(current, kept, isRunning) {
+    return !isRunning && kept !== null &&
+      (current.k !== kept.k || current.a !== kept.a ||
+        current.pattern !== kept.pattern || current.additionalpulses !== kept.additionalpulses);
   }
 
   function effectiveRetention(raw) {
@@ -366,6 +373,7 @@
     keepLight.disabled = running;
     returnLight.disabled = running || keptLight === null ||
       sameExperiment(currentExperiment(), keptLight);
+    returnPulseRecipe.disabled = !canReturnPulseRecipe(currentExperiment(), keptLight, running);
     lightStudyApply.disabled = running || sameExperiment(currentExperiment(), {
       rA: Number(lightStudies[lightStudy.value][0]),
       rB: Number(lightStudies[lightStudy.value][1]),
@@ -528,6 +536,14 @@
     decayUnit.value = keptLight.decayUnit;
     currentDecayUnit = keptLight.decayUnit;
     playStatus.textContent = "Paused.";
+    render();
+  });
+  returnPulseRecipe.addEventListener("click", () => {
+    if (!canReturnPulseRecipe(currentExperiment(), keptLight, running)) return;
+    pulseSpacing.value = String(keptLight.k);
+    pulseAmount.value = String(keptLight.a);
+    pulsePattern.value = keptLight.pattern;
+    pulseCount.value = keptLight.additionalpulses;
     render();
   });
   forgetLight.addEventListener("click", () => {

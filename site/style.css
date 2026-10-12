@@ -315,6 +315,16 @@ input[type="range"] {
   margin-top: 0;
 }
 
+#light-memory #return-pulse-recipe {
+  min-height: 45px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+#light-memory #return-pulse-recipe-help {
+  overflow-wrap: anywhere;
+}
+
 #light-memory .kept-curve-toggle {
   display: flex;
   min-height: 44px;

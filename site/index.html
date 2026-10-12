@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=25">
-  <script src="/app.js?v=35" defer></script>
+  <link rel="stylesheet" href="/style.css?v=26">
+  <script src="/app.js?v=36" defer></script>
 </head>
 <body>
   <main>
@@ -318,6 +318,10 @@
         <button id="return-light" type="button">Return to kept experiment</button>
         <button id="forget-light" type="button">Forget kept experiment</button>
       </div>
+      <div class="actions">
+        <button id="return-pulse-recipe" type="button" disabled>Use the kept pulse recipe</button>
+      </div>
+      <p id="return-pulse-recipe-help" class="muted">Copy the kept spacing, amount, alternating pattern and pulse count. Both flash fractions, the inspected update and the clock choices stay put. This changes the current train, not the saved experiment.</p>
       <p id="kept-light-info" class="muted">No light experiment kept.</p>
       <p id="kept-pulse-count-info" class="muted">No pulse count kept.</p>
       <p id="kept-pulse-pattern-info" class="muted">No pulse pattern kept.</p>
