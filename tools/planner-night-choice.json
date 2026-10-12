@@ -1,0 +1,80 @@
+{
+  "slug": "fading-light",
+  "mode": "bursts",
+  "lane": 14,
+  "title": "Fading Light — Compare the same burst under two clocks and two decay rules",
+  "group": "Two clocks, two decay rules",
+  "helpID": "light-three-clock-help",
+  "help": "Each first flash retains ninety-eight percent over thirty logical updates at the reference rate. Per-second decay adjusts the fraction per update when the rate changes. Two extra pulses still arrive every twenty-four updates, so their spacing in seconds changes. The third choice keeps the raw fraction per update instead. Read update ninety-six; this is lamp level, not exposure.",
+  "rows": [
+    [
+      "clock-thirty",
+      "Thirty updates per logical second",
+      [
+        "0.98",
+        "0.9",
+        "24",
+        "0.35",
+        "equal",
+        "2",
+        "30",
+        "second",
+        "96"
+      ]
+    ],
+    [
+      "clock-sixty",
+      "Sixty updates per logical second",
+      [
+        "0.98",
+        "0.9",
+        "24",
+        "0.35",
+        "equal",
+        "2",
+        "60",
+        "second",
+        "96"
+      ]
+    ],
+    [
+      "clock-sixty-update",
+      "Sixty updates with fixed fraction per update",
+      [
+        "0.98",
+        "0.9",
+        "24",
+        "0.35",
+        "equal",
+        "2",
+        "60",
+        "update",
+        "96"
+      ]
+    ]
+  ],
+  "depends": "nothing",
+  "message": "bursts experiments keep their distinct rules and exact supplied choices",
+  "fields": [
+    "retention",
+    "retention-b",
+    "pulse-spacing",
+    "pulse-amount",
+    "pulse-pattern",
+    "pulse-count",
+    "update-rate",
+    "decay-unit",
+    "frame"
+  ],
+  "facts": "effectiveRetention=.98**(30/rate). Train x0=.35,xn=min(1,r*x(n-1)+pulse),pulse=.35 on24/48 only. Compare at96. Spacing seconds=.8/.4/.4; chart time3.2/1.6/1.6seconds. Third row r=.98 per update, not adjusted. Levels at96 are26.48%/51.74%/26.48%. Per-second decay does not convert pulse spacing from updates.",
+  "picker": "light-study",
+  "noteID": "choice-note-fading-light",
+  "noteLead": "About the selected choice: ",
+  "noteFallback": "Other choices keep their existing descriptions.",
+  "notes": [
+    "At thirty updates per second, update ninety-six is 3.20 logical seconds. The two extra pulses are 0.80 seconds apart; the retained train level there is 26.48 percent.",
+    "At sixty updates per second with decay per second fixed, update ninety-six is 1.60 logical seconds. Pulses are 0.40 seconds apart; the retained train level there is 51.74 percent.",
+    "At sixty updates per second with fraction per update fixed, update ninety-six is still 1.60 logical seconds. The train level is 26.48 percent, like the thirty-update recipe, but it reaches that sample sooner."
+  ],
+  "noteMessage": "the selected fading-light choice explains its own experiment without adding an action"
+}
