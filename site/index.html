@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=22">
-  <script src="/app.js?v=31" defer></script>
+  <link rel="stylesheet" href="/style.css?v=23">
+  <script src="/app.js?v=32" defer></script>
 </head>
 <body>
   <main>
@@ -142,6 +142,11 @@
         </div>
         <p id="flash-gap-info" class="muted">Largest flash gap in this strip: 54.61 percentage points at update 19.</p>
         <p id="flash-gap-help" class="muted">This compares the two flashes across updates 0–120. It pauses at the earliest largest difference; it does not compare the pulse train.</p>
+      </details>
+      <details id="flash-ratio">
+        <summary>Compare the two current levels</summary>
+        <p id="flash-ratio-readout" class="readout">First / second at update 0: 1.000 ×.</p>
+        <p id="flash-ratio-help" class="muted">This divides the first current level by the second, using unrounded values. Equal levels give one. It is a level ratio, not a difference in percentage points or an exposure total.</p>
       </details>
       <details id="flash-crossings">
         <summary>When each flash crosses a level</summary>

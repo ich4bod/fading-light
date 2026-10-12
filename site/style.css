@@ -341,6 +341,36 @@ input[type="range"] {
   margin-top: 12px;
 }
 
+#flash-ratio {
+  display: grid;
+  gap: 8px;
+  max-width: 100%;
+  margin-top: 12px;
+  border: 1px solid #b8bcc6;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff3dc;
+  background: #18232c;
+}
+
+#flash-ratio > summary {
+  display: flex;
+  min-height: 45px;
+  align-items: center;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font: 16px system-ui, sans-serif;
+}
+
+#flash-ratio > .readout {
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+
+#flash-ratio > .muted {
+  overflow-wrap: anywhere;
+}
+
 #flash-crossings {
   display: grid;
   gap: 8px;

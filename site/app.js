@@ -30,6 +30,7 @@
   const flashPerSecondReadout = document.querySelector("#flash-per-second-readout");
   const seekFlashGap = document.querySelector("#seek-flash-gap");
   const flashGapInfo = document.querySelector("#flash-gap-info");
+  const flashRatioReadout = document.querySelector("#flash-ratio-readout");
   const flashCrossingRows = document.querySelector("#flash-crossing-rows");
   const pulseSpacing = document.querySelector("#pulse-spacing");
   const pulseSlotPrevious = document.querySelector("#pulse-slot-previous");
@@ -234,6 +235,7 @@
     const firstUpdate = Math.ceil(Math.log(target) / Math.log(r));
     const rB = effectiveRetention(Number(retentionB.value));
     const levelB = rB ** n;
+    flashRatioReadout.textContent = `First / second at update ${n}: ${(level / levelB).toFixed(3)} ×.`;
     flashPerSecondReadout.textContent = `After one logical second: first ${(100 * r ** currentRate).toFixed(3)}% · second ${(100 * rB ** currentRate).toFixed(3)}% of each starting flash.`;
     flashCrossingRows.replaceChildren();
     for (const [label, target] of [["50%", 0.5], ["10%", 0.1], ["1%", 0.01]]) {
