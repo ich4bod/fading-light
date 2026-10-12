@@ -269,6 +269,15 @@ input[type="range"] {
   font: 16px system-ui, sans-serif;
 }
 
+#light-studies .control {
+  min-width: 0;
+}
+
+#light-studies select {
+  width: 100%;
+  min-width: 0;
+}
+
 #light-studies select,
 #light-studies button {
   min-height: 45px;

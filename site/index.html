@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=24">
-  <script src="/app.js?v=34" defer></script>
+  <link rel="stylesheet" href="/style.css?v=25">
+  <script src="/app.js?v=35" defer></script>
 </head>
 <body>
   <main>
@@ -296,6 +296,9 @@
             <option value="burst-four">Four later pulses, then dark</option>
             <option value="burst-continues">The same train keeps arriving</option>
           </optgroup>
+          <option value="clock-30">One second at thirty updates</option>
+          <option value="clock-60-update">One second at sixty with unchanged fraction</option>
+          <option value="clock-60-second">One second at sixty with matched decay</option>
         </select>
       </div>
       <div class="actions">
@@ -303,6 +306,7 @@
       </div>
       <p id="light-study-help" class="muted">Load all the settings and update together. The lamps stay paused and your kept experiment stays put. Pulse spacing is still counted in updates.</p>
       <p id="light-burst-study-help" class="muted">These trains start with the same light, spacing and decay. A finite count ends the later additions, not the existing tail. Loading a study stays paused and keeps your saved experiment.</p>
+      <p id="light-clock-study-help" class="muted">The first and third flashes keep the same fraction after one logical second. The middle keeps the same fraction per update and therefore fades further at sixty updates. No later pulses are added.</p>
     </details>
 
     <details id="light-memory-drawer">
