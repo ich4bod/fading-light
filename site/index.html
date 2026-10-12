@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=26">
+  <link rel="stylesheet" href="/style.css?v=27">
   <script src="/app.js?v=36" defer></script>
 </head>
 <body>
@@ -331,6 +331,35 @@
       </label>
       <p id="kept-flash-curve-help" class="muted">Dashed cream is the first flash you kept, using its own saved decay rule and update rate. The working flashes and lamps stay as they are.</p>
       <p id="light-memory-help" class="muted">Return restores the experiment and its update. It does not start the clock.</p>
+      </section>
+    </details>
+
+    <details id="three-questions-fading-light">
+      <summary>Try three questions about keeping and clipping</summary>
+      <p>Pause the lamps before inspecting an update. The numbers belong to a mathematical light; updates and seconds are not interchangeable.</p>
+      <section>
+        <h3>Is a rejected pulse secretly waiting?</h3>
+        <p>Pause. Choose Fraction per update, fraction 0.995, pulse amount 0.7, Equal additions, Keep adding and spacing 12 updates. Inspect update 12, then open Read the additions so far.</p>
+        <details>
+          <summary>Read an answer</summary>
+          <p>The decayed train offers 65.91% before the new 70.00% pulse. Together they exceed the cap, so 35.91% is clipped and the lamp holds 100.00%. The rejected part is not stored for a later update. Continuing the train cannot retrieve it.</p>
+        </details>
+      </section>
+      <section>
+        <h3>Does a faster clock keep the same decay?</h3>
+        <p>Choose decay per update with fraction 0.995. Compare one logical second at 30 and 60 updates per second. Then choose decay per second instead.</p>
+        <details>
+          <summary>Read an answer</summary>
+          <p>Per update keeps about 86.04% after 30 updates and 74.03% after 60. Per second uses the reference thirty-update decay for one logical second at either rate. A rate change means something different depending on the unit of the retention rule.</p>
+        </details>
+      </section>
+      <section>
+        <h3>Is adding the sampled levels an exposure measurement?</h3>
+        <p>Inspect the optional sampled-level sum after several flash updates. Compare that number with the level at the current update.</p>
+        <details>
+          <summary>Read an answer</summary>
+          <p>They answer different questions. The current level is one retained value. The sum adds discrete sampled levels, including the initial sample; it is not a time integral. Without sample duration and a physical light scale, calling it real exposure would invent units the toy does not have.</p>
+        </details>
       </section>
     </details>
 

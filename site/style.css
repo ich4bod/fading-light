@@ -547,6 +547,46 @@ input[type="range"] {
   margin-top: 18px;
 }
 
+#three-questions-fading-light {
+  max-width: 100%;
+  margin: 16px 0;
+  border: 1px solid #ffd166;
+  border-radius: 8px;
+  padding: 12px;
+  font: 16px/1.5 system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+#three-questions-fading-light > summary,
+#three-questions-fading-light > section > details > summary {
+  display: flex;
+  min-height: 45px;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+#three-questions-fading-light h3 {
+  margin: 16px 0 8px;
+  font: bold 18px/1.35 system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+#three-questions-fading-light p {
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+#three-questions-fading-light > section > details {
+  max-width: 100%;
+  border: 1px solid #b8bcc6;
+  border-radius: 6px;
+  padding: 8px;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 520px) {
   .controls {
     grid-template-columns: 1fr;
