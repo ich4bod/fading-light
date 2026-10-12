@@ -287,6 +287,10 @@ input[type="range"] {
   display: none;
 }
 
+#light-tail-cap-study-help {
+  overflow-wrap: anywhere;
+}
+
 #light-memory-drawer {
   display: grid;
   gap: 8px;
