@@ -1,0 +1,75 @@
+{
+  "study": {
+    "mode": "bursts",
+    "group": "Four alternating arrivals, three tails",
+    "rows": [
+      [
+        "half-four-slow",
+        "Four alternating arrivals, long tail",
+        [
+          "0.995",
+          "0.9",
+          "12",
+          "0.35",
+          "half",
+          "4",
+          "30",
+          "update",
+          "48"
+        ]
+      ],
+      [
+        "half-four-middle",
+        "Four alternating arrivals, middle tail",
+        [
+          "0.98",
+          "0.9",
+          "12",
+          "0.35",
+          "half",
+          "4",
+          "30",
+          "update",
+          "48"
+        ]
+      ],
+      [
+        "half-four-short",
+        "Four alternating arrivals, short tail",
+        [
+          "0.9",
+          "0.9",
+          "12",
+          "0.35",
+          "half",
+          "4",
+          "30",
+          "update",
+          "48"
+        ]
+      ]
+    ],
+    "notes": [
+      "The initial offer is thirty-five percent. Four later arrivals alternate half and full offers; the long tail keeps ninety-nine point five percent per update. No fifth arrival follows.",
+      "The same four alternating arrivals now keep ninety-eight percent per update. The finite count and offered amounts do not change.",
+      "The same four alternating arrivals now keep ninety percent per update. A shorter tail leaves more room; rejecting light never saves it for later."
+    ],
+    "noteID": "choice-note-fading-light",
+    "noteLead": "About the selected choice: ",
+    "picker": "light-study",
+    "facts": "Initiala=.35; arrivals12/24/36/48 offer.175/.35/.175/.35. x_n=min(1,r*x_(n-1)+offer_n). count4 excludesinitial, noarrival60. Need selectednote913 shipped; preserve all queued/shipped burstfamilies.",
+    "dep": 913,
+    "message": "bursts histories keep their authored relationship and independent memory",
+    "fields": [
+      "retention",
+      "retention-b",
+      "pulse-spacing",
+      "pulse-amount",
+      "pulse-pattern",
+      "pulse-count",
+      "update-rate",
+      "decay-unit",
+      "frame"
+    ]
+  }
+}
