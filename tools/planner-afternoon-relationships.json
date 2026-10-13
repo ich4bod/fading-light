@@ -1,0 +1,78 @@
+{
+  "bursts": {
+    "mode": "bursts",
+    "picker": "light-study",
+    "noteID": "choice-note-fading-light",
+    "noteLead": "About the selected choice: ",
+    "slug": "fading-light",
+    "lane": 14,
+    "title": "Fading Light — Compare three tails at the same age after their last offer",
+    "group": "The last offer is equally far behind",
+    "rows": [
+      [
+        "equal-tail-age-12",
+        "Twenty-four quiet updates after spacing 12",
+        [
+          "0.9",
+          "0.995",
+          "12",
+          "0.7",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "48"
+        ]
+      ],
+      [
+        "equal-tail-age-24",
+        "Twenty-four quiet updates after spacing 24",
+        [
+          "0.9",
+          "0.995",
+          "24",
+          "0.7",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "72"
+        ]
+      ],
+      [
+        "equal-tail-age-48",
+        "Twenty-four quiet updates after spacing 48",
+        [
+          "0.9",
+          "0.995",
+          "48",
+          "0.7",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "120"
+        ]
+      ]
+    ],
+    "notes": [
+      "Two extra full offers are twelve updates apart. Read update forty-eight, exactly twenty-four quiet updates after the last offer. Earlier retained light can still influence the final tail.",
+      "Two extra full offers are twenty-four updates apart. Update seventy-two is twenty-four quiet updates after the last offer, matching the first tail age but not its earlier arrival history.",
+      "Two extra full offers are forty-eight updates apart. Update one hundred twenty is again twenty-four updates after the last offer. Equal tail age is different from comparing one common update number."
+    ],
+    "facts": "Nine-string order is retention,retention-b,pulse-spacing,pulse-amount,pulse-pattern,pulse-count,update-rate,decay-unit,frame. x0=.7;x_n=min(1,.9*x_(n-1)+offer);two additional .7 offers at spacing and twice-spacing only. Supplied frames48/72/120 have equal24-update silence. Host results 7.61%,6.06%,5.62%. All total offers2.1; lamp level not exposure; no clipped addition in these three rows.",
+    "dep": 913,
+    "message": "bursts afternoon relationships preserve exact choices and independent memory",
+    "fields": [
+      "retention",
+      "retention-b",
+      "pulse-spacing",
+      "pulse-amount",
+      "pulse-pattern",
+      "pulse-count",
+      "update-rate",
+      "decay-unit",
+      "frame"
+    ]
+  }
+}
