@@ -82,7 +82,10 @@
     "clock-60-second": ["0.98", "0.98", "24", "0.35", "equal", "0", "60", "second", "60"],
     "tail-slow-cap": ["0.995", "0.9", "12", "0.7", "equal", "1", "30", "update", "12"],
     "tail-middle-cap": ["0.98", "0.9", "12", "0.7", "equal", "1", "30", "update", "12"],
-    "tail-fast-room": ["0.9", "0.9", "12", "0.7", "equal", "1", "30", "update", "12"]
+    "tail-fast-room": ["0.9", "0.9", "12", "0.7", "equal", "1", "30", "update", "12"],
+    "burst-equal-three": ["0.9", "0.995", "12", "0.35", "equal", "all", "30", "update", "36"],
+    "burst-half-three": ["0.9", "0.995", "12", "0.35", "half", "all", "30", "update", "36"],
+    "burst-half-two": ["0.9", "0.995", "12", "0.35", "half", "2", "30", "update", "36"]
   };
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");

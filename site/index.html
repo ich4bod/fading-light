@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=28">
-  <script src="/app.js?v=37" defer></script>
+  <link rel="stylesheet" href="/style.css?v=29">
+  <script src="/app.js?v=38" defer></script>
 </head>
 <body>
   <main>
@@ -304,12 +304,18 @@
             <option value="tail-middle-cap">Middle tail, clipped second pulse</option>
             <option value="tail-fast-room">Short tail, room for the second pulse</option>
           </optgroup>
+          <optgroup label="Smaller alternate answers">
+            <option value="burst-equal-three">Continuing full answers</option>
+            <option value="burst-half-three">Continuing alternating answers</option>
+            <option value="burst-half-two">Two alternating answers, then silence</option>
+          </optgroup>
         </select>
       </div>
       <div class="actions">
         <button id="light-study-apply" type="button">Use this experiment</button>
       </div>
       <p id="light-study-help" class="muted">Load all the settings and update together. The lamps stay paused and your kept experiment stays put. Pulse spacing is still counted in updates.</p>
+      <p id="light-half-burst-study-help" class="muted">Each train begins at thirty-five percent. Equal answers offer that amount every twelve updates; alternate answers offer half as much at odd pulse numbers. The finite alternate burst offers only two additional pulses, so update thirty-six contains no new offer. Applying seeks that update without running the clock.</p>
       <p id="light-tail-cap-study-help" class="muted">Each experiment offers seventy percent at the start and again at update twelve. Only the fraction kept per update changes. A brighter surviving tail can reject more of the same new pulse; clipped light is not held for later.</p>
       <p id="light-burst-study-help" class="muted">These trains start with the same light, spacing and decay. A finite count ends the later additions, not the existing tail. Loading a study stays paused and keeps your saved experiment.</p>
       <p id="light-clock-study-help" class="muted">The first and third flashes keep the same fraction after one logical second. The middle keeps the same fraction per update and therefore fades further at sixty updates. No later pulses are added.</p>
