@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=32">
-  <script src="/app.js?v=42" defer></script>
+  <script src="/app.js?v=43" defer></script>
 </head>
 <body>
   <main>
@@ -323,6 +323,21 @@
             <option value="clock-thirty">Thirty updates per logical second</option>
             <option value="clock-sixty">Sixty updates per logical second</option>
             <option value="clock-sixty-update">Sixty updates with fixed fraction per update</option>
+          </optgroup>
+          <optgroup label="Two pulses, three tail retentions">
+            <option value="tail-retentions-0">Retain 0.9 per update</option>
+            <option value="tail-retentions-1">Retain 0.98 per update</option>
+            <option value="tail-retentions-2">Retain 0.995 per update</option>
+          </optgroup>
+          <optgroup label="An alternating burst ends">
+            <option value="alternating-ending-0">End after one extra pulse</option>
+            <option value="alternating-ending-1">End after 2 extra pulses</option>
+            <option value="alternating-ending-2">End after 4 extra pulses</option>
+          </optgroup>
+          <optgroup label="One burst, three later readings">
+            <option value="late-tail-0">Read update 48</option>
+            <option value="late-tail-1">Read update 96</option>
+            <option value="late-tail-2">Read update 120</option>
           </optgroup>
         </select>
       </div>

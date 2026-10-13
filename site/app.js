@@ -74,7 +74,16 @@
   const selectedChoiceNotes = {
     "clock-thirty": "About the selected choice: At thirty updates per second, update ninety-six is 3.20 logical seconds. The two extra pulses are 0.80 seconds apart; the retained train level there is 26.48 percent.",
     "clock-sixty": "About the selected choice: At sixty updates per second with decay per second fixed, update ninety-six is 1.60 logical seconds. Pulses are 0.40 seconds apart; the retained train level there is 51.74 percent.",
-    "clock-sixty-update": "About the selected choice: At sixty updates per second with fraction per update fixed, update ninety-six is still 1.60 logical seconds. The train level is 26.48 percent, like the thirty-update recipe, but it reaches that sample sooner."
+    "clock-sixty-update": "About the selected choice: At sixty updates per second with fraction per update fixed, update ninety-six is still 1.60 logical seconds. The train level is 26.48 percent, like the thirty-update recipe, but it reaches that sample sooner.",
+    "tail-retentions-0": "About the selected choice: At update 120, the train reads 0.02%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.9 per update. Loading stays paused.",
+    "tail-retentions-1": "About the selected choice: At update 120, the train reads 16.30%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+    "tail-retentions-2": "About the selected choice: At update 120, the train reads 65.21%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.995 per update. Loading stays paused.",
+    "alternating-ending-0": "About the selected choice: At update 96, the train reads 9.12%. It began with 0.35 and received 1 extra half/full alternating additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+    "alternating-ending-1": "About the selected choice: At update 96, the train reads 22.39%. It began with 0.35 and received 2 extra half/full alternating additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+    "alternating-ending-2": "About the selected choice: At update 96, the train reads 68.17%. It began with 0.35 and received 4 extra half/full alternating additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+    "late-tail-0": "About the selected choice: At update 48, the train reads 69.82%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+    "late-tail-1": "About the selected choice: At update 96, the train reads 26.48%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused.",
+    "late-tail-2": "About the selected choice: At update 120, the train reads 16.30%. It began with 0.35 and received 2 extra equal additions, spaced 24 updates apart. Retention is 0.98 per update. Loading stays paused."
   };
   const lightStudies = {
     tail: ["0.995", "0.9", "12", "0.7", "equal", "1", "30", "update", "24"],
@@ -100,7 +109,16 @@
     "after-four": ["0.98", "0.9", "12", "0.35", "equal", "4", "30", "update", "72"],
     "clock-thirty": ["0.98", "0.9", "24", "0.35", "equal", "2", "30", "second", "96"],
     "clock-sixty": ["0.98", "0.9", "24", "0.35", "equal", "2", "60", "second", "96"],
-    "clock-sixty-update": ["0.98", "0.9", "24", "0.35", "equal", "2", "60", "update", "96"]
+    "clock-sixty-update": ["0.98", "0.9", "24", "0.35", "equal", "2", "60", "update", "96"],
+    "tail-retentions-0": ["0.9", "0.9", "24", "0.35", "equal", "2", "30", "update", "120"],
+    "tail-retentions-1": ["0.98", "0.9", "24", "0.35", "equal", "2", "30", "update", "120"],
+    "tail-retentions-2": ["0.995", "0.9", "24", "0.35", "equal", "2", "30", "update", "120"],
+    "alternating-ending-0": ["0.98", "0.9", "24", "0.35", "half", "1", "30", "update", "96"],
+    "alternating-ending-1": ["0.98", "0.9", "24", "0.35", "half", "2", "30", "update", "96"],
+    "alternating-ending-2": ["0.98", "0.9", "24", "0.35", "half", "4", "30", "update", "96"],
+    "late-tail-0": ["0.98", "0.9", "24", "0.35", "equal", "2", "30", "update", "48"],
+    "late-tail-1": ["0.98", "0.9", "24", "0.35", "equal", "2", "30", "update", "96"],
+    "late-tail-2": ["0.98", "0.9", "24", "0.35", "equal", "2", "30", "update", "120"]
   };
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");
