@@ -1,7 +1,7 @@
 {
   "bursts": {
     "mode": "bursts",
-    "group": "The same offers meet three caps",
+    "group": "The same offers, three decay rates",
     "rows": [
       [
         "cap-two-fast",
