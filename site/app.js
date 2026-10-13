@@ -91,7 +91,10 @@
     "finite-spacing-forty-eight": ["0.9", "0.995", "48", "0.7", "equal", "2", "30", "update", "96"],
     "after-one": ["0.98", "0.9", "12", "0.35", "equal", "1", "30", "update", "72"],
     "after-two": ["0.98", "0.9", "12", "0.35", "equal", "2", "30", "update", "72"],
-    "after-four": ["0.98", "0.9", "12", "0.35", "equal", "4", "30", "update", "72"]
+    "after-four": ["0.98", "0.9", "12", "0.35", "equal", "4", "30", "update", "72"],
+    "clock-thirty": ["0.98", "0.9", "24", "0.35", "equal", "2", "30", "second", "96"],
+    "clock-sixty": ["0.98", "0.9", "24", "0.35", "equal", "2", "60", "second", "96"],
+    "clock-sixty-update": ["0.98", "0.9", "24", "0.35", "equal", "2", "60", "update", "96"]
   };
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");

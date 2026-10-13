@@ -318,6 +318,15 @@ input[type="range"] {
   overflow-wrap: anywhere;
 }
 
+#light-three-clock-help {
+  min-width: 0;
+  max-width: 100%;
+  margin: 8px 0;
+  color: #b8bcc6;
+  font: 16px/1.5 system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
 #light-memory-drawer {
   display: grid;
   gap: 8px;
