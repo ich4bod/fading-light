@@ -8,7 +8,7 @@
         "No later offers, twelve-update spacing",
         [
           "0.98",
-          "1",
+          "0.995",
           "12",
           "0.35",
           "equal",
@@ -23,7 +23,7 @@
         "No later offers, twenty-four-update spacing",
         [
           "0.98",
-          "1",
+          "0.995",
           "24",
           "0.35",
           "equal",
@@ -38,7 +38,7 @@
         "No later offers, forty-eight-update spacing",
         [
           "0.98",
-          "1",
+          "0.995",
           "48",
           "0.35",
           "equal",
