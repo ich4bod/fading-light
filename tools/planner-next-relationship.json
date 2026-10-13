@@ -1,0 +1,75 @@
+{
+  "bursts": {
+    "mode": "bursts",
+    "group": "The same offers meet three caps",
+    "rows": [
+      [
+        "cap-two-fast",
+        "Two additions with ninety percent retained",
+        [
+          "0.9",
+          "0.995",
+          "12",
+          "0.7",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "24"
+        ]
+      ],
+      [
+        "cap-two-medium",
+        "Two additions with ninety-eight percent retained",
+        [
+          "0.98",
+          "0.995",
+          "12",
+          "0.7",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "24"
+        ]
+      ],
+      [
+        "cap-two-slow",
+        "Two additions with ninety-nine point five percent retained",
+        [
+          "0.995",
+          "0.995",
+          "12",
+          "0.7",
+          "equal",
+          "2",
+          "30",
+          "update",
+          "24"
+        ]
+      ]
+    ],
+    "notes": [
+      "The initial 0.7 and two additions of 0.7 offer 2.1 units altogether. At ninety percent retention these additions do not reach the cap; offered light is not a sum of held samples.",
+      "The same offers arrive twelve updates apart. With ninety-eight percent retention both additions exceed the unit cap before clipping; some offered light is rejected.",
+      "The same offers and spacing meet a slower decay. Both additions exceed the unit cap before clipping. Update twenty-four is the last arrival, not a quiet tail."
+    ],
+    "facts": "L0=.7; eachupdate L=min(1,r*L+offer); offer=.7 at12/24 only. Totaloffered2.1, frame24. r=.9 reachesno cap;r=.98/.995 clipboth arrivals. Decay/cap/model unchanged; onlyrecipes.",
+    "dep": 913,
+    "fields": [
+      "retention",
+      "retention-b",
+      "pulse-spacing",
+      "pulse-amount",
+      "pulse-pattern",
+      "pulse-count",
+      "update-rate",
+      "decay-unit",
+      "frame"
+    ],
+    "picker": "light-study",
+    "noteID": "choice-note-fading-light",
+    "noteLead": "About the selected choice: ",
+    "message": "bursts comparisons keep exact choices silent and reversible"
+  }
+}
