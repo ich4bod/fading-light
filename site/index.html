@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
   <link rel="stylesheet" href="/style.css?v=30">
-  <script src="/app.js?v=39" defer></script>
+  <script src="/app.js?v=40" defer></script>
 </head>
 <body>
   <main>
@@ -314,12 +314,18 @@
             <option value="finite-spacing-twenty-four">Two additions twenty-four updates apart</option>
             <option value="finite-spacing-forty-eight">Two additions forty-eight updates apart</option>
           </optgroup>
+          <optgroup label="After the last addition">
+            <option value="after-one">One extra pulse, then fading</option>
+            <option value="after-two">Two extra pulses, then fading</option>
+            <option value="after-four">Four extra pulses, then fading</option>
+          </optgroup>
         </select>
       </div>
       <div class="actions">
         <button id="light-study-apply" type="button">Use this experiment</button>
       </div>
       <p id="light-study-help" class="muted">Load all the settings and update together. The lamps stay paused and your kept experiment stays put. Pulse spacing is still counted in updates.</p>
+      <p id="light-after-burst-help" class="muted">All three lamps begin at thirty-five percent and retain ninety-eight percent per update. Extra equal pulses arrive every twelve updates, then stop after one, two or four additions. At update seventy-two each burst has ended. This reads retained lamp level, not accumulated exposure.</p>
       <p id="light-finite-spacing-help" class="muted">Each recipe starts at seventy percent and offers two more full pulses of the same amount. Only the spacing changes. The cap may reject offered light, and the final pulse arrives at a different time. Update ninety-six compares what remains, not the sum offered. Applying does not run the clock.</p>
       <p id="light-half-burst-study-help" class="muted">Each train begins at thirty-five percent. Equal answers offer that amount every twelve updates; alternate answers offer half as much at odd pulse numbers. The finite alternate burst offers only two additional pulses, so update thirty-six contains no new offer. Applying seeks that update without running the clock.</p>
       <p id="light-tail-cap-study-help" class="muted">Each experiment offers seventy percent at the start and again at update twelve. Only the fraction kept per update changes. A brighter surviving tail can reject more of the same new pulse; clipped light is not held for later.</p>
