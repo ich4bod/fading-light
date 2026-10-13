@@ -69,7 +69,13 @@
   const returnLight = document.querySelector("#return-light");
   const returnPulseRecipe = document.querySelector("#return-pulse-recipe");
   const lightStudy = document.querySelector("#light-study");
+  const choiceNote = document.querySelector("#choice-note-fading-light");
   const lightStudyApply = document.querySelector("#light-study-apply");
+  const selectedChoiceNotes = {
+    "clock-thirty": "About the selected choice: At thirty updates per second, update ninety-six is 3.20 logical seconds. The two extra pulses are 0.80 seconds apart; the retained train level there is 26.48 percent.",
+    "clock-sixty": "About the selected choice: At sixty updates per second with decay per second fixed, update ninety-six is 1.60 logical seconds. Pulses are 0.40 seconds apart; the retained train level there is 51.74 percent.",
+    "clock-sixty-update": "About the selected choice: At sixty updates per second with fraction per update fixed, update ninety-six is still 1.60 logical seconds. The train level is 26.48 percent, like the thirty-update recipe, but it reaches that sample sooner."
+  };
   const lightStudies = {
     tail: ["0.995", "0.9", "12", "0.7", "equal", "1", "30", "update", "24"],
     steps: ["0.9", "0.995", "12", "0.35", "equal", "all", "30", "update", "24"],
@@ -112,6 +118,10 @@
   let runStopUpdate = 120;
   let specialPulseStop = false;
   let rafHandle = null;
+
+  function updateSelectedChoiceNote() {
+    choiceNote.textContent = selectedChoiceNotes[lightStudy.value] || "Other choices keep their existing descriptions.";
+  }
 
   function currentExperiment() {
     return {
@@ -273,6 +283,7 @@
   }
 
   function render() {
+    updateSelectedChoiceNote();
     const n = Number(frame.value);
     const r = effectiveRetention(Number(retention.value));
     const level = r ** n;
