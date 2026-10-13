@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
   <title>Fading Light</title>
-  <link rel="stylesheet" href="/style.css?v=29">
-  <script src="/app.js?v=38" defer></script>
+  <link rel="stylesheet" href="/style.css?v=30">
+  <script src="/app.js?v=39" defer></script>
 </head>
 <body>
   <main>
@@ -309,12 +309,18 @@
             <option value="burst-half-three">Continuing alternating answers</option>
             <option value="burst-half-two">Two alternating answers, then silence</option>
           </optgroup>
+          <optgroup label="Same offers, different spacing">
+            <option value="finite-spacing-twelve">Two additions twelve updates apart</option>
+            <option value="finite-spacing-twenty-four">Two additions twenty-four updates apart</option>
+            <option value="finite-spacing-forty-eight">Two additions forty-eight updates apart</option>
+          </optgroup>
         </select>
       </div>
       <div class="actions">
         <button id="light-study-apply" type="button">Use this experiment</button>
       </div>
       <p id="light-study-help" class="muted">Load all the settings and update together. The lamps stay paused and your kept experiment stays put. Pulse spacing is still counted in updates.</p>
+      <p id="light-finite-spacing-help" class="muted">Each recipe starts at seventy percent and offers two more full pulses of the same amount. Only the spacing changes. The cap may reject offered light, and the final pulse arrives at a different time. Update ninety-six compares what remains, not the sum offered. Applying does not run the clock.</p>
       <p id="light-half-burst-study-help" class="muted">Each train begins at thirty-five percent. Equal answers offer that amount every twelve updates; alternate answers offer half as much at odd pulse numbers. The finite alternate burst offers only two additional pulses, so update thirty-six contains no new offer. Applying seeks that update without running the clock.</p>
       <p id="light-tail-cap-study-help" class="muted">Each experiment offers seventy percent at the start and again at update twelve. Only the fraction kept per update changes. A brighter surviving tail can reject more of the same new pulse; clipped light is not held for later.</p>
       <p id="light-burst-study-help" class="muted">These trains start with the same light, spacing and decay. A finite count ends the later additions, not the existing tail. Loading a study stays paused and keeps your saved experiment.</p>

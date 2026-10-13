@@ -85,7 +85,10 @@
     "tail-fast-room": ["0.9", "0.9", "12", "0.7", "equal", "1", "30", "update", "12"],
     "burst-equal-three": ["0.9", "0.995", "12", "0.35", "equal", "all", "30", "update", "36"],
     "burst-half-three": ["0.9", "0.995", "12", "0.35", "half", "all", "30", "update", "36"],
-    "burst-half-two": ["0.9", "0.995", "12", "0.35", "half", "2", "30", "update", "36"]
+    "burst-half-two": ["0.9", "0.995", "12", "0.35", "half", "2", "30", "update", "36"],
+    "finite-spacing-twelve": ["0.9", "0.995", "12", "0.7", "equal", "2", "30", "update", "96"],
+    "finite-spacing-twenty-four": ["0.9", "0.995", "24", "0.7", "equal", "2", "30", "update", "96"],
+    "finite-spacing-forty-eight": ["0.9", "0.995", "48", "0.7", "equal", "2", "30", "update", "96"]
   };
   const forgetLight = document.querySelector("#forget-light");
   const keptLightInfo = document.querySelector("#kept-light-info");
